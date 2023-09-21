@@ -34,3 +34,30 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+21/9: khởi tạo dự án 
+1. Xây dựng thư mục theo quy tắc 
+    - assets chứa các file tĩnh được trong trang web
+    - lib chứa các chỉnh sửa trong trang web: 
+        + các custom hook
+        + store để quản lý các state : import từ folder 'services'
+        + cấu hình axios, local storage 
+    - modules chứa: 
+        + global-component: chứa các components được tái sử dụng ở nhiều trang.
+        + golbal-styles: chứa các style được tái sử dụng nhiều.
+        + mỗi module chứa:
+            ~ components: chứa các component được dùng trong module
+            ~ templates: chứa các trang ở trong module ; chứa file layout, error và not-found( nếu custom riêng)
+    - services: 
+        + chứa các thao tác với API, với phía server 
+        + chứa các hàm để quản lý các state 
+
+2. dự tính các thư viện dùng trong dự án: 
+    - quản lý state: redux 
+    - style: taiwind
+    - thao tác với backend: axios
+    ...updating
+ 
+
+    
