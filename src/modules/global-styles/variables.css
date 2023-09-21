@@ -1,0 +1,25 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+    --color-main: #f5c518;
+    --color-secondary: #33c5f3;
+    --color-hover: #73777b;
+    --color-bg: #d9d7d7;
+    --white: #fff;
+    --white-second: rgba(255, 255, 255, 0.7);
+    --black: #2c2c2c;
+    --black-second: #434242;
+    --blue: #5799ef;
+  }
+  
