@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { LocalizationProvider, DateField } from "@mui/x-date-pickers";
+import { LocalizationProvider, DateField, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { FormField, TextFieldStyled } from "~/modules/global-styles/custom-mui";
@@ -33,8 +33,8 @@ function FormBasicComponent({ values, handleChange, dayOfBirth, setDob }) {
       </FormField>
       <FormField>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["DateField"]}>
-            <DateField
+          <DemoContainer components={["DatePicker"]}>
+            <DatePicker
               label="Ngày sinh"
               name="dob"
               value={dayOfBirth}

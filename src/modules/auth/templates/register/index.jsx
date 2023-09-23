@@ -18,14 +18,18 @@ import dayjs from "dayjs";
 import ErrorLogComponent from "./ErrorLogComponent";
 import FormBasicComponent from "./FormBasic";
 import FormUniqueComponent from "./FormUnique";
+import { authRequest } from "~/services/auth/authRequest";
+import { useDispatch } from "react-redux";
 
 const SignUp = (props) => {
+  const dispatch = useDispatch()
   const [errorLog, setErrorLog] = useState(0);
   const [basicForm, setBasicForm] = useState(true);
-  const [dayOfBirth, setDob] = useState(dayjs(new Date()));
-  function postData(values) {
+  const [dayOfBirth, setDob] = useState(dayjs('2023-04-20'));
+  async function postData(values) {
     values.dob = dayOfBirth.toISOString().slice(0, 10);
     console.log("values: ", values);
+    await authRequest.register(values, dispatch);
   }
   return (
     <PageContained bgcolor="var(--white)" container="true">
@@ -36,9 +40,6 @@ const SignUp = (props) => {
         onSubmit={(values, actions) => {
           setErrorLog(0);
           postData(values);
-          setTimeout(() => {
-            alert(JSON.stringify(values));
-          }, 2000);
         }}
       >
         {({ values, handleChange, handleSubmit, errors }) => (
@@ -99,7 +100,7 @@ const SignUp = (props) => {
                       setErrorLog(2);
                       handleSubmit();
                     }}
-                    type="submit"
+      
                   >
                     <span> Tạo tài khoản khách hàng</span>
                   </ButtonMain>
