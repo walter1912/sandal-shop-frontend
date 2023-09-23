@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ButtonMain,
   FormField,
@@ -11,10 +11,27 @@ import { ErrorMessage, Formik } from "formik";
 
 import { Divider } from "@mui/material";
 import Link from "next/link";
-import loginSchema from "~/models/validations/loginSchema";
+import loginSchema, { loginDto } from "~/models/validations/loginSchema";
 import CustomPopover from "../../components/popover";
+import { authRequest } from "~/services/auth/authRequest";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
+import { useRouter } from "next/navigation";
 
 const LoginWithAccount = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const response = useAppSelector((state) => state.response);
+
+
+  async function postData(values: loginDto) {
+    await authRequest.login(values, dispatch);
+  }
+  // sau khi dang nhap thi se chuyen toi trang chu
+  useEffect(() => {
+    setTimeout(() => {
+      if (response.type === "success" && response.toast) router.push("/");
+    }, 1000);
+  }, [response]);
   return (
     <PageContained bgcolor="var(--white)">
       <Link href="/">Sandal Shop</Link>
@@ -25,7 +42,7 @@ const LoginWithAccount = () => {
         }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
-          alert(JSON.stringify(values));
+          postData(values);
         }}
       >
         {({ touched, values, handleChange, handleSubmit }) => (

@@ -1,5 +1,4 @@
 "use client";
-import { Inter } from "next/font/google";
 import { Provider } from "react-redux";
 import AppLayout from "~/modules/app-layout";
 import "~/modules/global-styles/variables.css";
@@ -8,8 +7,6 @@ import store from "~/lib/store";
 import CustomToastify from "~/modules/global-components/CustomToastify";
 // import '~/modules/global-styles/global.css'
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function RootLayout({
   children,
 }: {
@@ -17,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={inter.className}>
+      <body>
         <Provider store={store}>
           <AppLayout>
             {children}
