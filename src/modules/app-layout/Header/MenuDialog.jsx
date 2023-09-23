@@ -37,7 +37,7 @@ const MenuDialog = (props) => {
       <Button
         variant="text"
         onClick={handleClickOpen}
-        style={{ textTransform: "none", color: "var(--white)" }}
+        style={{ textTransform: "none", color: "var(--black)" }}
       >
         <MenuIcon />
         <span>Menu</span>
@@ -67,8 +67,8 @@ const MenuDialog = (props) => {
                 </IconGridMenu>
                 Movies
               </h2>
-              {listMenuDialog[0].listaction.map((action) => (
-                <LinkStyled href={action.route}>{action.name}</LinkStyled>
+              {listMenuDialog[0].listaction.map((action, index) => (
+                <LinkStyled  key={index}  href={action.route}>{action.name}</LinkStyled>
               ))}
             </GridMenu>
             <GridMenu xs={6}>
@@ -78,8 +78,8 @@ const MenuDialog = (props) => {
                 </IconGridMenu>
                 Celebs
               </h2>
-              {listMenuDialog[1].listaction.map((action) => (
-                <LinkStyled href={action.route}>{action.name}</LinkStyled>
+              {listMenuDialog[1].listaction.map((action, index) => (
+                <LinkStyled key={index} href={action.route}>{action.name}</LinkStyled>
               ))}
             </GridMenu>
           </Grid2>
@@ -91,8 +91,8 @@ const MenuDialog = (props) => {
                 </IconGridMenu>
                 TV Show
               </h2>
-              {listMenuDialog[2].listaction.map((action) => (
-                <LinkStyled href={action.route}>{action.name}</LinkStyled>
+              {listMenuDialog[2].listaction.map((action, index) => (
+                <LinkStyled key={index} href={action.route}>{action.name}</LinkStyled>
               ))}
             </GridMenu>
             <GridMenu xs={6}>
@@ -102,8 +102,8 @@ const MenuDialog = (props) => {
                 </IconGridMenu>
                 Watch
               </h2>
-              {listMenuDialog[3].listaction.map((action) => (
-                <LinkStyled href={action.route}>{action.name}</LinkStyled>
+              {listMenuDialog[3].listaction.map((action, index) => (
+                <LinkStyled key={index}  href={action.route}>{action.name}</LinkStyled>
               ))}
             </GridMenu>
           </Grid2>
@@ -115,8 +115,8 @@ const MenuDialog = (props) => {
                 </IconGridMenu>
                 Awards and Events
               </h2>
-              {listMenuDialog[4].listaction.map((action) => (
-                <LinkStyled href={action.route}>{action.name}</LinkStyled>
+              {listMenuDialog[4].listaction.map((action,index) => (
+                <LinkStyled  key={index} href={action.route}>{action.name}</LinkStyled>
               ))}
             </GridMenu>
             <GridMenu xs={6}>
@@ -126,8 +126,8 @@ const MenuDialog = (props) => {
                 </IconGridMenu>
                 Community
               </h2>
-              {listMenuDialog[5].listaction.map((action) => (
-                <LinkStyled href={action.route}>{action.name}</LinkStyled>
+              {listMenuDialog[5].listaction.map((action, index) => (
+                <LinkStyled key={index}  href={action.route}>{action.name}</LinkStyled>
               ))}
             </GridMenu>
           </Grid2>

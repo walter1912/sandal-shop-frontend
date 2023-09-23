@@ -1,12 +1,8 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 
 //material UI
-import {
-  Divider,
-  IconButton,
-  InputAdornment,
-} from "@mui/material";
+import { Divider, IconButton, InputAdornment } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 //asset
@@ -20,21 +16,29 @@ import AccountMenu from "./AccountMenu";
 import MenuDialog from "./MenuDialog.jsx";
 import Link from "next/link";
 import { Contained, SearchForm, MenuList } from "./custom-mui";
-
-const Header = (props?:any) => {
+import { Imgs } from "~/assets";
+import Image from "next/image";
+import logo from "~/assets/images/logo.png";
+const Header = (props?: any) => {
   return (
     <>
       <Contained>
         <Link className="main logo" href="/">
-          {/* <Imgs.Logo style={{ marginTop: 6, padding: 0 }} /> */}
-          logo 1
+          <Image
+            alt="Logo"
+            src={logo}
+            style={{
+              width: "80px",
+              height: "auto",
+            }}
+          />
         </Link>
         <MenuList>
           <MenuDialog />
         </MenuList>
         <SearchForm
           type={"search"}
-          focus
+          focus="true"
           endAdornment={
             <InputAdornment position="end">
               <IconButton onClick={() => {}} edge="end">
@@ -59,7 +63,14 @@ const Header = (props?:any) => {
           placeholder="Search IMDb"
         />
         <MenuList>
-          {/* <Imgs.Logo2 /> */} logo 2
+        <Image
+            alt="Logo"
+            src={logo}
+            style={{
+              width: "60px",
+              height: "auto",
+            }}
+          />
         </MenuList>
         <Divider
           orientation="vertical"
@@ -88,6 +99,7 @@ const Header = (props?:any) => {
           <ArrowDropDown />
         </MenuList>
       </Contained>
+      <Divider />
     </>
   );
 };

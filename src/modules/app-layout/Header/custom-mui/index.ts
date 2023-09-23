@@ -8,8 +8,8 @@ export const Contained = styled(Container)((props?: any) => ({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  backgroundColor: "var(--black)",
-  color: "var(--white)",
+  backgroundColor: "var(--white)",
+  color: "var(--black)",
 }));
 export const MenuList = styled("div")((props?: any) => ({
   padding: "0px 20px",
@@ -18,11 +18,11 @@ export const MenuList = styled("div")((props?: any) => ({
   height: "100%",
   lineHeight: "100%",
   display: "flex",
-  color: "var(--white)",
+  color: "var(--black)",
   alignItems: "center",
   borderRadius: "4px",
   "&:hover": {
-    backgroundColor: "var(--color-second)",
+    backgroundColor: "var(--color-hover)",
   },
   span: {
     marginLeft: "4px",

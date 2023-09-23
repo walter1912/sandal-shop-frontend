@@ -7,7 +7,7 @@ import Link from "next/link";
 export const DialogStyled = styled(Dialog)((props?: any) => ({
   ".MuiDialog-paper": {
     padding: "40px 120px",
-    background: "var(--black)",
+    background: "var(--white)",
   },
 }));
 export const ToolbarStyled = styled(Toolbar)((props?: any) => ({
@@ -23,7 +23,7 @@ export const IconButtonClose = styled(IconButton)((props?: any) => ({
   },
 }));
 export const GridMenu = styled(Grid2)((props?: any) => ({
-  color: "var(--white)",
+  color: "var(--black)",
   width: "100%",
   display: "flex",
   flexDirection: "column",
@@ -38,7 +38,7 @@ export const IconGridMenu = styled(IconButton)((props?: any) => ({
 }));
 export const LinkStyled = styled(Link)((props?: any) => ({
   marginBottom: "20px",
-  backgroundColor: "var(--black)",
+  backgroundColor: "var(--white)",
   color: "var(--color-bg)",
   "&:hover": {
     textDecoration: "underline",
