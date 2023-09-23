@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import {
   ButtonMain,
@@ -17,11 +17,9 @@ import CustomPopover from "../../components/popover";
 const LoginWithAccount = () => {
   return (
     <PageContained bgcolor="var(--white)">
-      <Link href="/">
-       Sandal Shop
-      </Link>
+      <Link href="/">Sandal Shop</Link>
       <Formik
-        initialValues ={{
+        initialValues={{
           username: "",
           password: "",
         }}
@@ -42,7 +40,9 @@ const LoginWithAccount = () => {
                   value={values.username}
                   onChange={handleChange}
                   placeholder="Nhập username của bạn"
-                  helperText={touched.username && <ErrorMessage name="username" />}
+                  helperText={
+                    touched.username && <ErrorMessage name="username" />
+                  }
                 />
               </FormField>
 
@@ -53,7 +53,10 @@ const LoginWithAccount = () => {
                   }}
                 >
                   <label>Mật khẩu</label>
-                  <Link href={`forgetPassword`}  style={{ float: "right" , color: 'var(--text-color)'}}>
+                  <Link
+                    href={`forgetPassword`}
+                    style={{ float: "right", color: "var(--text-color)" }}
+                  >
                     Quên mật khẩu?
                   </Link>
                 </div>
@@ -93,10 +96,10 @@ const LoginWithAccount = () => {
                   txtbutton="Chi tiết"
                   contentpopover={
                     <span>
-                      Chọn "Giữ cho tôi đăng nhập" sẽ giảm số lần
-                       bạn được yêu cầu Đăng nhập trên thiết bị này. Để giữ cho bạn
-                       bảo mật tài khoản, chỉ sử dụng tùy chọn này cho mục đích cá nhân của bạn
-                       thiết bị.
+                      Chọn "Giữ cho tôi đăng nhập" sẽ giảm số lần bạn được yêu
+                      cầu Đăng nhập trên thiết bị này. Để giữ cho bạn bảo mật
+                      tài khoản, chỉ sử dụng tùy chọn này cho mục đích cá nhân
+                      của bạn thiết bị.
                     </span>
                   }
                   styles={{ height: "176px", width: "440px" }}

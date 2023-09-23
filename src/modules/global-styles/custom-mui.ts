@@ -55,7 +55,7 @@ export const TextFieldStyled = styled(TextField)((props) => ({
   },
 }));
 
-export const ErrorLog = styled(Alert)((props) => ({
+export const ErrorLog = styled(Alert)(() => ({
   minWidth: "360px",
   marginTop: "20px",
   marginBottom: "20px",
