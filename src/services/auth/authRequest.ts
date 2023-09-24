@@ -39,7 +39,7 @@ export const authRequest = {
         let { access_token, refreshToken } = res.data;
         setLocalStorage("access_token", access_token);
         const resUser: any = await axiosInstance.get("auth/profile");
-        let { message, user } = resUser;
+        let { message, user } = resUser.data;
         const payload = {
           ...user,
           access_token,

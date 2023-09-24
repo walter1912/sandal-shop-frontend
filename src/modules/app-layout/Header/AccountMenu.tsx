@@ -1,11 +1,12 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Menu, MenuItem } from "@mui/material";
 
 import Link from "next/link";
-import { MenuItemStyled, MenuStyled } from './custom-mui/acount-menu';
+import { MenuItemStyled, MenuStyled } from "./custom-mui/acount-menu";
 import { typeActions } from "./data/typeActions";
+import { useAppSelector } from "~/lib/store/hook";
 
 const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -16,9 +17,12 @@ const AccountMenu = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  let account = {
-    username: "Walter1912",
-  };
+  const auth = useAppSelector((state) => state.auth);
+
+  const [account, setAccount] = useState(auth);
+  useEffect(() => {
+    setAccount(auth);
+  }, [auth]);
 
   return (
     <div>

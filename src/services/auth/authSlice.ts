@@ -7,9 +7,9 @@ import {
 import { AuthDto } from "~/models/validations/auth";
 
 const initialAuth: AuthDto = {
-  id: "",
-  username: "",
-  role: "",
+  id: getLocalStorage("auth")?.id ?? "",
+  username: getLocalStorage("auth")?.username ?? "",
+  role: getLocalStorage("auth")?.role ?? "",
   access_token: getLocalStorage("access_token"),
   refresh_token: getLocalStorage("refresh_token"),
 };
@@ -26,7 +26,7 @@ export const authSlice = createSlice({
       state.role = role;
       state.access_token = access_token;
       state.refresh_token = refresh_token;
-
+      setLocalStorage("auth", action.payload);
       setLocalStorage("access_token", access_token);
       setLocalStorage("refresh_token", refresh_token);
     },
@@ -39,7 +39,7 @@ export const authSlice = createSlice({
       state.access_token = "";
       state.refresh_token = "";
       removeLocalStorage("access_token");
-      removeLocalStorage("refresh_token");
+      removeLocalStorage("auth");
     },
   },
 });
