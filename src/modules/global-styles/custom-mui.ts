@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
 import styled from "@emotion/styled";
 import { Alert, Button, Container, TextField } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Form } from "formik";
 
-export const PageContained = styled(Container)((props: {
-    bgcolor?: string
-}) => ({
-  width: "100%",
-  paddingTop: "20px",
-  paddingBottom: "40px",
-  backgroundColor: props.bgcolor ?? "var(--black)",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+export const PageContained = styled(Container)(
+  (props: { bgcolor?: string }) => ({
+    width: "100%",
+    paddingTop: "20px",
+    paddingBottom: "40px",
+    backgroundColor: props.bgcolor ?? "var(--black)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  })
+);
 //form có thể dùng cho login và sign up
 export const FormStyled = styled(Form)((props) => ({
   minWidth: "360px",
@@ -80,14 +80,14 @@ export const ButtonMain = styled(Button)(() => ({
   },
 }));
 
-export const ButtonText = styled(Button)((props : {
-    txtcolor? : string
-}) => ({
+export const ButtonText = styled(Button)((props: { txtcolor?: string }) => ({
   textTransform: "none",
-  backgroundColor: "transparent",
-  fontSize: "1rem",
+  // fontSize: "1rem",
+  fontWeight: 550,
   color: props.txtcolor,
   "&:hover": {
-    backgroundColor: "var(--color-hover)",
+    backgroundColor: "transparent",
+    textDecoration: "underline",
+    textDecorationColor: "currentColor",
   },
 }));

@@ -15,4 +15,8 @@ export interface Product {
   coupon: string;
 
   star: number;
+
+  img: string;
+
+  bought?: number;
 }
