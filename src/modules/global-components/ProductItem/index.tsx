@@ -14,25 +14,34 @@ import { ButtonStyled, CardStyled, IconButtonStyled } from "./custom-mui";
 import { ButtonText } from "~/modules/global-styles/custom-mui";
 import Image from "next/image";
 
-const ProductItem = ({ product }: { product: Product }) => {
-  const { id, name, star, cost, img, bought } = product;
-
-  const width = "370px";
-  const height = "260px";
+const ProductItem = ({
+  data,
+  width,
+  height,
+}: {
+  data : Product,
+  width?: number,
+  height?: number,
+}) => {
+  const { id, name, star, cost, img, bought } = data;
+  if(width === undefined) {
+    width = 370
+  }
+  if(height === undefined) {
+    height = 260
+  }
   return (
     <CardStyled width={width} height={height}>
-      {/* <PosterBookmark
-        poster={movie.poster}
-        trailer={movie.link}
-        width="186px"
-        height="272px"
-      /> */}
       <Image
-        src={String(product.img)}
+        src={String(img)}
         alt={name}
-        width={370}
-        height={260}
+        width={width}
+        height={height}
         priority
+        // style={{
+        //   width: `${width}`,
+        //   height:  `${height}`,
+        // }}
       />
       <CardContent
         sx={{
@@ -51,10 +60,10 @@ const ProductItem = ({ product }: { product: Product }) => {
           className="flex-row-center"
           sx={{
             margin: "20px 0",
-           
+
             justifyContent: "space-between",
-            ".cost" : {
-              color:'var(--orange)',
+            ".cost": {
+              color: "var(--orange)",
               fontSize: "1.4rem",
               fontWeight: "600",
               letterSpacing: "1.4px",
@@ -64,9 +73,9 @@ const ProductItem = ({ product }: { product: Product }) => {
               lineHeight: "1.4rem",
               fontSize: "1.4rem",
             },
-            '.bought': {
-              color: 'var(--black-second)'
-            }
+            ".bought": {
+              color: "var(--black-second)",
+            },
           }}
         >
           <span className=" cost">

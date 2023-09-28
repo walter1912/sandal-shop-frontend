@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import { Button, Card, IconButton } from "@mui/material";
 
 export const CardStyled = styled(Card)(
-  ({ width, height }: { width: string; height: string }) => ({
-    width: width,
-    height: `calc(${height} + 150px)`,
+  ({ width, height }: { width: number; height: number }) => ({
+    width: width + 'px',
+    height: `calc(${height}px + 150px)`,
     postion: "relative",
     backgroundColor: "var(--white)",
     display: "flex",
