@@ -40,7 +40,7 @@ const product2 =  {
   stock: 0,
   cost: 30000,
   coupon: "SALE10, SALE20, SALE50",
-  star: 4.6,
+  star: 3.4,
   img: "https://down-vn.img.susercontent.com/file/vn-11134201-23030-b4ci7bqs9gov08",
   bought: 100,
 };

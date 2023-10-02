@@ -1,6 +1,10 @@
 a, a:active, a:visited {
     text-decoration: none;
 }
+
+li, ul {
+    list-style-type: none;
+}
 .MuiTooltip-popper {
     height: 20px!important;
     /* top: -10px !important; */

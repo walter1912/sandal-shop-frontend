@@ -1,3 +1,4 @@
+'use client'
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import React from "react";
@@ -48,7 +49,7 @@ function SlideImage({
           position: "absolute",
           top: "50%",
           right: 0,
-          left: -16,
+          left: -28,
         
           transform: "translate(0, -50%)",
           display: "flex",

@@ -1,4 +1,5 @@
 export interface Product {
+    reviews?: number;
     id?: string;
   name: string;
   element: {
@@ -20,5 +21,7 @@ export interface Product {
   img: string;
 
   bought?: number;
+
+  size?: number;
 
 }

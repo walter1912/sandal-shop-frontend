@@ -70,8 +70,8 @@ export const ErrorLog = styled(Alert)(() => ({
 export const ButtonMain = styled(Button)(() => ({
   width: "100%",
   backgroundColor: "var(--color-main)",
-  border: "1px solid var(--black-second)",
-  textTransform: "none",
+  border: "2px solid var(--black-second)",
+  // textTransform: "none",
   color: "var(--black)",
   opacity: 0.8,
   "&:hover": {
@@ -80,8 +80,18 @@ export const ButtonMain = styled(Button)(() => ({
   },
 }));
 
+export const ButtonOutlined = styled(Button)(() => ({
+  fontWeight: 500,
+  border: "2px solid currentColor",
+  opacity: 0.8,
+  "&:hover": {
+    backgroundColor: "var(--color-hover)",
+    opacity: 1,
+  },
+}));
+
 export const ButtonText = styled(Button)((props: { txtcolor?: string }) => ({
-  textTransform: "none",
+  // textTransform: "none",
   // fontSize: "1rem",
   fontWeight: 550,
   color: props.txtcolor,
