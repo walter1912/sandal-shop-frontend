@@ -4,6 +4,7 @@ export interface Product {
   element: {
     sole: { color: string; material: string };
     sandal: { color: string; material: string };
+    des?: string;
   };
   //  enum: ['tong', '2 quai', '3 quai'],
   style: string;
@@ -19,4 +20,5 @@ export interface Product {
   img: string;
 
   bought?: number;
+
 }
