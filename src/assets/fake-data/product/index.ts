@@ -1,6 +1,6 @@
 import { Product } from "~/models/product";
 
-let product: Product = {
+export let product: Product = {
     id: "id",
     name: "Dép tông loại một",
     element: {
@@ -22,7 +22,7 @@ let product: Product = {
     img: "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhahy42migabe6",
     bought: 100,
   };
-const product2 =  {
+export const product2 =  {
   id: "id",
   name: "Dép tông loại hai",
   element: {

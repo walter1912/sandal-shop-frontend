@@ -9,6 +9,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'routine.vn',
+        port: '',
+        pathname: '/media/catalog/product/**',
+      },
     ],
   },
 };
