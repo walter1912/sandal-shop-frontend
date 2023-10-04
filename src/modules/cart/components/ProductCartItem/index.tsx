@@ -7,11 +7,11 @@ import { ProductCart } from "~/models/productCart";
 function ProductCartItem({
   productCart,
   handleDeleteProductCart,
-  setListProductBill,
+  listProductBill,
 }: {
   productCart: ProductCart;
   handleDeleteProductCart: Function;
-  setListProductBill: Function;
+  listProductBill: string[];
 }) {
   const [quantity, setQuantity] = useState<number>(productCart.quantity);
   let width = 124;
@@ -67,7 +67,7 @@ function ProductCartItem({
           component="div"
           className="flex-row-center"
           sx={{
-            marginRight: "20px",
+            margin: "20px 20px 20px 0",
             "& div": {
               cursor: "pointer",
               border: "1px solid var(--color-hover)",
@@ -78,9 +78,21 @@ function ProductCartItem({
             },
           }}
         >
-          <div onClick={() => setQuantity((quantity) => quantity - 1)}>-</div>
-          <div>{quantity}</div>
-          <div onClick={() => setQuantity((quantity) => quantity + 1)}>+</div>
+          {listProductBill.includes(String(productCart.id)) ? (
+            <>
+              <span>Số lượng: {quantity}</span>
+            </>
+          ) : (
+            <>
+              <div onClick={() => setQuantity((quantity) => quantity - 1)}>
+                -
+              </div>
+              <div>{quantity}</div>
+              <div onClick={() => setQuantity((quantity) => quantity + 1)}>
+                +
+              </div>
+            </>
+          )}
         </Box>
         <div className="price flex-row-center currentcy">
           {productCart.price}
@@ -89,35 +101,16 @@ function ProductCartItem({
       </div>
 
       <div className="handle_ProductCart">
-        <IconButton
-          className="delete_productCart"
-          onClick={() => handleDeleteProductCart(productCart.id)}
-        >
-          <Delete />
-        </IconButton>
-
-        <Checkbox
-          onChange={(e: any) =>
-            setListProductBill((pre: string[]) => {
-              const updatedList: string[] = [...pre];
-              if (e.target.checked) {
-                updatedList.push(String(productCart.id));
-              } else {
-                const index = updatedList.indexOf(String(productCart.id));
-                if (index !== -1) {
-                  updatedList.splice(index, 1);
-                }
-              }
-              return updatedList;
-            })
-          }
-          sx={{
-            color: "var(--orange)",
-            "&.Mui-checked": {
-              color: "var(--orange)",
-            },
-          }}
-        />
+        {listProductBill.includes(String(productCart.id)) ? (
+          ""
+        ) : (
+          <IconButton
+            className="delete_productCart"
+            onClick={() => handleDeleteProductCart(productCart.id)}
+          >
+            <Delete />
+          </IconButton>
+        )}
       </div>
     </Box>
   );

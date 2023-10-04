@@ -1,6 +1,6 @@
 "use client";
 import { ShoppingCart } from "@mui/icons-material";
-import { Box, List, TextField } from "@mui/material";
+import { Box, Checkbox, List, TextField } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useState } from "react";
 import { ProductCart } from "~/models/productCart";
@@ -34,12 +34,38 @@ function CustomerCart() {
           <h2>Danh sách sản phẩm trong giỏ hàng</h2>
           <List>
             {listProductcart.map((productCart, index) => (
-              <ProductCartItem
-                key={index}
-                handleDeleteProductCart={handleDeleteProductCart}
-                productCart={productCart}
-                setListProductBill={setListProductBill}
-              />
+              <div className="flex-row-center">
+                <Checkbox
+                  onChange={(e: any) =>
+                    setListProductBill((pre: string[]) => {
+                      const updatedList: string[] = [...pre];
+                      if (e.target.checked) {
+                        updatedList.push(String(productCart.id));
+                      } else {
+                        const index = updatedList.indexOf(
+                          String(productCart.id)
+                        );
+                        if (index !== -1) {
+                          updatedList.splice(index, 1);
+                        }
+                      }
+                      return updatedList;
+                    })
+                  }
+                  sx={{
+                    color: "var(--orange)",
+                    "&.Mui-checked": {
+                      color: "var(--orange)",
+                    },
+                  }}
+                />
+                <ProductCartItem
+                  key={index}
+                  handleDeleteProductCart={handleDeleteProductCart}
+                  productCart={productCart}
+                  listProductBill={listProductBill}
+                />
+              </div>
             ))}
           </List>
           <div>Đã thêm {listProductBill.length} sản phẩm </div>

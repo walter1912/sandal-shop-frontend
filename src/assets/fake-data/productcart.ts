@@ -7,7 +7,7 @@ prod.size = 36;
 export let productCart: ProductCart = {
   id: "12",
   product: prod,
-  quantity: 0,
+  quantity: 3,
   coupon: "",
   price: 90000,
 };
