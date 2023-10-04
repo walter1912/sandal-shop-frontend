@@ -5,18 +5,22 @@ import React, { useState } from "react";
 import { productCart, productCart2 } from "~/assets/fake-data/productcart";
 import { ProductCart } from "~/models/productCart";
 import ProductCartItem from "~/modules/cart/components/ProductCartItem";
-import { ButtonOutlined } from "~/modules/global-styles/custom-mui";
+import { ButtonMain, ButtonOutlined } from "~/modules/global-styles/custom-mui";
 import ChooseAddress from "./choose-address";
+import { BoxNavbarItemCalcCostStyles, Grid2NavbarListStyles } from "./styles";
 
 function PendingBillTemplate() {
   const listProductBill = [productCart, productCart2];
   const listIdProductBill = [String(productCart.id), String(productCart2.id)];
   const [couponChoosed, setCouponChoosed] = useState<string>("");
-  const [address, setAddress] = useState<string>('')
+  const [address, setAddress] = useState<string>("");
+
+  const [priceCart, setPriceCart] = useState<number>(200000);
+  const [discountCoupon, setDiscountCoupon] = useState<number>(-20000);
+  const [costShip, setCostShip] = useState<number>(50000);
   const styleInput = {
     width: "178px",
     height: "40px",
-    marginRight: "40px",
     paddingLeft: "10px",
   };
   return (
@@ -38,71 +42,54 @@ function PendingBillTemplate() {
         <Grid2
           xs={12}
           md={6}
-          sx={{
-            paddingRight: "40px",
-            "& .navbar-item": {
-              padding: "40px",
-              marginBottom: "20px",
-            },
-          }}
+          sx={{...Grid2NavbarListStyles}}
         >
           <Box>
             <ChooseAddress stylesSelect={styleInput} setAddress={setAddress} />
           </Box>
-          <Box
-            className="navbar-item"
-            sx={{ backgroundColor: "var(--color-bg)" }}
-          >
+          <Box component="div" className="navbar-item navbar-item--bg">
             <p>MÃ COUPON ƯU ĐÃI</p>
             <div
-              className="flex-row-center"
               style={{
                 height: "40px",
+                display: "flex",
+                justifyContent: "left",
               }}
             >
               <input
-                style={
-                  styleInput
-                  // outlineColor:'var(--orange)'
-                }
+                style={{
+                  ...styleInput,
+                  marginRight: "40px",
+                }}
                 name="couponChoosed"
                 value={couponChoosed}
                 onChange={(e) => setCouponChoosed(e.target.value)}
                 placeholder="Nhập mã ưu đãi"
               />
-              <ButtonOutlined sx={{ height: "100%", color: "var(--orange)" }}>
+              <ButtonOutlined
+                sx={{
+                  height: "100%",
+                  color: "var(--orange)",
+                }}
+              >
                 Áp dụng
               </ButtonOutlined>
             </div>
           </Box>
           <Box
-            className="navbar-item"
-            sx={{
-              border: "1px solid var(--color-bg)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              "& .calc-cost": {
-                width: "400px",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "0.5px solid var(--orange)",
-                marginBottom: "20px",
-                marginTop: "10px",
-              },
-            }}
+            className="navbar-item navbar-item--border"
+            sx={{...BoxNavbarItemCalcCostStyles}}
           >
             <p>TẠM TÍNH</p>
             <div className="products-cost calc-cost">
               Sản phẩm:{" "}
               <span className="currentcy">
-                {200000} <span>₫</span>
+                {priceCart} <span>₫</span>
               </span>
             </div>
             <div
               className="coupons-cost"
-              style={{ display: "flex", flexDirection: "column" }}
+              style={{ display: "flex", flexDirection: "column" , width:'100%'}}
             >
               <span>Các mã giảm giá được áp dụng:</span>
               <ul>
@@ -119,16 +106,28 @@ function PendingBillTemplate() {
               <span className="calc-cost">
                 Được giảm giá:{" "}
                 <span className="currentcy">
-                  - {50000} <span>₫</span>
+                  {discountCoupon} <span>₫</span>
                 </span>
               </span>
             </div>
             <div className="ship-cost calc-cost">
               Phí ship:{" "}
               <span className="currentcy">
-                + {10000} <span>₫</span>{" "}
+                + {costShip} <span>₫</span>{" "}
               </span>
             </div>
+            <ButtonMain>
+            
+              <span className="currentcy"
+              style={{
+                fontSize:'20px',
+                letterSpacing:'2px'
+              }}
+              >
+                 Thanh toán {priceCart + discountCoupon + costShip}
+                <span>₫</span>
+              </span>
+            </ButtonMain>
           </Box>
         </Grid2>
       </Grid2>

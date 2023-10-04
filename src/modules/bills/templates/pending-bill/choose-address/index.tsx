@@ -1,5 +1,6 @@
 "use client";
-import { FormControl } from "@mui/material";
+import { FormControl, Tooltip } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ButtonOutlined } from "~/modules/global-styles/custom-mui";
@@ -8,12 +9,12 @@ function ChooseAddress({
   stylesSelect,
   setAddress,
 }: {
-  stylesSelect: object;
+  stylesSelect: any;
   setAddress: Function;
 }) {
-  const [cityChoosed, setCityChoosed] = useState<string>("1");
-  const [districtChoosed, setDistrictChoosed] = useState<string>("1");
-  const [wardChoosed, setWardChoosed] = useState<string>("1");
+  const [cityChoosed, setCityChoosed] = useState<string>("");
+  const [districtChoosed, setDistrictChoosed] = useState<string>("");
+  const [wardChoosed, setWardChoosed] = useState<string>("");
   const [dataCity, setDataCity] = useState<any[]>([]); // State to store fetched data
   const [dataDistrict, setDataDistrict] = useState<any[]>([]); // State to store fetched data
   const [dataWard, setDataWard] = useState<any[]>([]); // State to store fetched data
@@ -48,13 +49,13 @@ function ChooseAddress({
     // host = https://provinces.open-api.vn/api/p/{cityChoosed.id}?depth=2
 
     let newHost = `${host}p/${cityChoosed}?depth=2`;
-    fetchData(newHost, "district");
+    if (cityChoosed !== "") fetchData(newHost, "district");
   }, [cityChoosed]);
   useEffect(() => {
     // host = https://provinces.open-api.vn/api/d/{districtChoosed.id}?depth=2
 
     let newHost = `${host}d/${districtChoosed}?depth=2`;
-    fetchData(newHost, "ward");
+    if (districtChoosed !== "") fetchData(newHost, "ward");
   }, [districtChoosed]);
 
   // phần check xem tỉnh/ huyện nào được chọn
@@ -107,9 +108,13 @@ function ChooseAddress({
       <select
         id={select}
         onChange={(e) => handleChange(select)}
-        style={stylesSelect}
+        style={{
+          ...stylesSelect,
+          width: "100%",
+        }}
+        defaultValue={placeholder}
       >
-        <option disabled value="" defaultChecked>
+        <option key={0} value="" defaultChecked>
           {placeholder}
         </option>
         {row}
@@ -132,34 +137,50 @@ function ChooseAddress({
   }
 
   return (
-    <div style={{ marginBottom: "40px", border: "1px solid var(--color-bg)" }}>
+    <div
+      className="navbar-item navbar-item--bg"
+      style={{ marginBottom: "40px" }}
+    >
       <h4>Địa chỉ nhận hàng</h4>
-      <div className="flex-row-center">
-        <div className="flex-column-center">
-          {renderOptions(dataCity, "city")}
-          {renderOptions(dataDistrict, "district")}
-          {renderOptions(dataWard, "ward")}
-        </div>
-        <div className="flex-column-center">
-          <p
-            style={{
-              color: "var(--black-second)",
-            }}
-          >
-            Mô tả chi tiết số nhà, đường hoặc xóm
-          </p>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Grid2 container spacing={1}>
+          <Grid2 xs={12} md={4}>
+            {renderOptions(dataCity, "city")}
+          </Grid2>
+          <Grid2 xs={12} md={4}>
+            {renderOptions(dataDistrict, "district")}
+          </Grid2>
+          <Grid2 xs={12} md={4}>
+            {renderOptions(dataWard, "ward")}
+          </Grid2>
+        </Grid2>
+        <Tooltip title="Mô tả chi tiết số nhà, đường hoặc xóm">
           <input
-            style={stylesSelect}
+            style={{
+              width: "100%",
+              height: stylesSelect.height ?? "40px",
+              paddingLeft: stylesSelect.paddingLeft,
+              marginTop: "10px",
+            }}
             placeholder="Địa chỉ chi tiết"
             id="detailAddress"
           />
-        <ButtonOutlined onClick={handleSaveAddress}
-        sx={{
-            marginTop: '20px',
-            ...stylesSelect
-        }}
-        >Lưu địa chỉ</ButtonOutlined>
-        </div>
+        </Tooltip>
+        <ButtonOutlined
+          onClick={handleSaveAddress}
+          sx={{
+            marginTop: "20px",
+            ...stylesSelect,
+          }}
+        >
+          Lưu địa chỉ
+        </ButtonOutlined>
       </div>
     </div>
   );

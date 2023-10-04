@@ -6,11 +6,11 @@ li, ul {
     list-style-type: none;
 }
 .MuiTooltip-popper {
-    height: 20px!important;
+    height: 20px;
     /* top: -10px !important; */
 }
 .MuiTooltip-tooltip {
-      color: var(--color-bg)!important;
-      background-color: transparent!important;
+      color: var(--color-bg);
+      background-color: transparent;
       /* color: black!important; */
   }
