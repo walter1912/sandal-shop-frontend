@@ -58,6 +58,44 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     - style: taiwind
     - thao tác với backend: axios
     ...updating
+
+
+
+## các bước thực hiện 
+- B1: hoàn thiện 80 - 90% UI các trang của customer 
+target 5/10: 
+1. hoàn thiện ui trang list-bill của customer 
+    tương tự như cart nhưng có thêm tag: chờ thanh toán, đang giao, đã nhận
+    đặc biệt: ở mục đã nhận => khi bấm vào bill 
+    thì đến trang detail-bill tương tự như pending-bill và ở mỗi sản phẩm sẽ có thêm nút đánh giá 
+    khi bấm vào thì sẽ quay lại trang sản phẩm và có phần 
+    Đánh giá: 1. rate (có sẵn) 2. reiview (text + img)
+
+2. hoàn thiện trang detail customer 
+    có các chức năng: 
+    2.1 update thông tin => mình đã làm r nên copy theo 
+    2.2 list coupon => có sẵn CouponItem rồi, thêm Pagination nữa là đc 
+IMPORTANT: PHẢI HOÀN THIỆN 80% UI CUSTOMER 
+
+- B2: liên kết api, store giữa các trang customer 
+- B2.1: tạo các services 
+- B2.2: hoàn thiện logic từ trang này xong mới tới trang khác đảm bảo hoàn thiện 95%.
+
+Một vài chức năng còn rối: 
+ 1. tính tổng tiền khi thanh toán 
+ 2. tính discount của coupon 
+ 3. tính phí ship
+- B3: kiểm tra tất cả logic của các trang customer
+- B4: tạo UI các trang admin 
+- tương tự như với giao diện customer 
+mở rộng: chưa có api lẫn ui
+1. thêm tính năng chat khách hàng với shop 
+2. thêm tính năng đăng ký bằng facebook, google 
+3. thêm tính năng tạo mẫu dép cho khách hàng
+4. thêm tính năng viết bài viết đánh giá cho khách hàng (cái này mình đã làm r nên copy lại là đc)
+5. CHỨC NĂNG THÔNG BÁO (chưa hình dung được nó ntn => nên chắc hơi lâu)
+
+
  
 
     

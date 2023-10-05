@@ -39,11 +39,7 @@ function PendingBillTemplate() {
             ))}
           </List>
         </Grid2>
-        <Grid2
-          xs={12}
-          md={6}
-          sx={{...Grid2NavbarListStyles}}
-        >
+        <Grid2 xs={12} md={6} sx={{ ...Grid2NavbarListStyles }}>
           <Box>
             <ChooseAddress stylesSelect={styleInput} setAddress={setAddress} />
           </Box>
@@ -78,7 +74,7 @@ function PendingBillTemplate() {
           </Box>
           <Box
             className="navbar-item navbar-item--border"
-            sx={{...BoxNavbarItemCalcCostStyles}}
+            sx={{ ...BoxNavbarItemCalcCostStyles }}
           >
             <p>TẠM TÍNH</p>
             <div className="products-cost calc-cost">
@@ -89,7 +85,11 @@ function PendingBillTemplate() {
             </div>
             <div
               className="coupons-cost"
-              style={{ display: "flex", flexDirection: "column" , width:'100%'}}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+              }}
             >
               <span>Các mã giảm giá được áp dụng:</span>
               <ul>
@@ -117,14 +117,14 @@ function PendingBillTemplate() {
               </span>
             </div>
             <ButtonMain>
-            
-              <span className="currentcy"
-              style={{
-                fontSize:'20px',
-                letterSpacing:'2px'
-              }}
+              <span
+                className="currentcy"
+                style={{
+                  fontSize: "20px",
+                  letterSpacing: "2px",
+                }}
               >
-                 Thanh toán {priceCart + discountCoupon + costShip}
+                Thanh toán {priceCart + discountCoupon + costShip}
                 <span>₫</span>
               </span>
             </ButtonMain>
