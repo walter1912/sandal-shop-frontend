@@ -13,6 +13,7 @@ const CustomSlider = ({ children, width, height }) => {
     <Carousel
       //   navButtonsAlwaysVisible
       fullHeightHover={false}
+      autoPlay={false}
       sx={{
         width: { width },
         height: { height },

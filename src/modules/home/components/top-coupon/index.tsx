@@ -1,14 +1,21 @@
 "use client";
 import { ArrowForwardIosOutlined } from "@mui/icons-material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import React from "react";
-import { listCoupon } from "~/assets/fake-data/coupon";
+import React, { useEffect } from "react";
+// import { listCoupon } from "~/assets/fake-data/coupon";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
 import CouponItem from "~/modules/global-components/CouponItem";
 import CustomSlider from "~/modules/global-components/CustomSlider";
 import SectionTitle from "~/modules/global-components/SectionTitle";
 import { ButtonText } from "~/modules/global-styles/custom-mui";
+import { couponsRequest } from "~/services/coupons/couponsRequest";
 
 function TopCoupon() {
+  const dispatch = useAppDispatch();
+  const coupons = useAppSelector(state => state.coupons);
+  useEffect(()=> {
+    couponsRequest.getTopCoupon(dispatch);
+  }, []);
   return (
     <Grid2 width="100%">
       <div
@@ -23,7 +30,7 @@ function TopCoupon() {
         </ButtonText>
       </div>
       <CustomSlider width={"860px"}>
-        {listCoupon
+        {coupons.top
           .reduce<number[]>((result, cp, index) => {
             if (index % 2 === 0) {
               result.push(index);
@@ -32,7 +39,7 @@ function TopCoupon() {
           }, [])
           .map((value) => {
             let j = value + 1;
-            if (j === listCoupon.length) {
+            if (j === coupons.top.length) {
               j = 0;
             }
 
@@ -41,8 +48,8 @@ function TopCoupon() {
                 className="flex-row-center"
                 style={{ padding: 0, margin: 0 }}
               >
-                <CouponItem coupon={listCoupon[value]} key={value} />
-                <CouponItem coupon={listCoupon[j]} key={value} />
+                <CouponItem coupon={coupons.top[value]} key={value} />
+                <CouponItem coupon={coupons.top[j]} key={value + j} />
               </div>
             );
           })}

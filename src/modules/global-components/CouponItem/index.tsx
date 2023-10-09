@@ -2,11 +2,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Card } from "@mui/material";
-import { Gesture, ListAlt, Photo } from "@mui/icons-material";
+import { ConfirmationNumber, Gesture, ListAlt, Photo } from "@mui/icons-material";
 import { CouponDto } from "~/models/coupon";
 import Image from "next/image";
-import styles from './coupon.module.css'
+import styles from "./coupon.module.css";
 import Icon from "./icon";
+import { ButtonText } from "~/modules/global-styles/custom-mui";
 // import IconPlay from '../IconPlay';
 // code: "",
 // name: "",
@@ -16,16 +17,16 @@ import Icon from "./icon";
 // end: new Date(),
 // countUsed: 0
 const CouponItem = ({ coupon }: { coupon: CouponDto }) => {
-  let { code, name, img, percent } = coupon;
+  let { code, name, img, percent, countUsed } = coupon;
 
   return (
     <Card
-    className={styles.coupon}
+      className={styles.coupon}
       sx={{
         // color: "var(--white)",
         width: "fit-content",
         padding: "10px",
-        height: "312px",
+        height: "322px",
         postion: "relative",
         // backgroundColor: "var(--black)",
         display: "flex",
@@ -57,34 +58,29 @@ const CouponItem = ({ coupon }: { coupon: CouponDto }) => {
               "linear-gradient(360deg, rgba(26,26,26,.7) 36%,rgba(49,49,50,0.4) 60%, rgba(245,245,245,0.01) 100%)",
             display: "flex",
             alignItems: "center",
-            fontSize: "1.2rem",
-            "& svg:hover": {
+            // fontSize: "1.2rem",
+            fontWeight: 500,
+            "& svg": {
               fill: "var(--color-main)",
             },
             "& span": {
-              textTransform: "capitalize",
+              // textTransform: "capitalize",
               marginLeft: "16px",
+              color: "var(--color-main)",
             },
           }}
         >
-          <Gesture />
-          {/* {type === 'list' &&  <ListAlt />} */}
-          {/* {type === 'photos' &&  <Photo />} */}
-          {/* {type === 'video' &&  <IconPlay size="28px" />} */}
-          {/* <span>{type === 'video' ? coupon.video.time : type}</span> */}
+          <ConfirmationNumber />
+          <span>
+            {countUsed} lượt đã dùng
+          </span>
         </Box>
       </div>
       {/* <CardContent> */}
-      <span>{name}</span>
-      <a
-        href='#'
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{ color: "var(--blue)" }}
-        className="card__actions"
-      >
-        Sử dụng
-      </a>
+      <span style={{margin: '10px 10px'}}>{name}</span>
+    
+        <ButtonText sx={{padding:'20px'}}> Sử dụng</ButtonText>
+    
     </Card>
   );
 };
