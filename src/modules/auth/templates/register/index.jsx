@@ -20,6 +20,9 @@ import FormBasicComponent from "./FormBasic";
 import FormUniqueComponent from "./FormUnique";
 import { authRequest } from "~/services/auth/authRequest";
 import { useDispatch } from "react-redux";
+import { useAppSelector } from "~/lib/store/hook";
+import { useRouter } from "next/navigation";
+import { useAuthSuccess } from "~/lib/hooks/useAuthSuccess";
 
 const SignUp = (props) => {
   const dispatch = useDispatch()
@@ -31,6 +34,8 @@ const SignUp = (props) => {
     console.log("values: ", values);
     await authRequest.register(values, dispatch);
   }
+  useAuthSuccess();
+
   return (
     <PageContained bgcolor="var(--white)" container="true">
       <Link href="/">logo1</Link>

@@ -1,17 +1,21 @@
 import styled from "@emotion/styled";
 import { Container, OutlinedInput } from "@mui/material";
+import Link from "next/link";
 
 export const Contained = styled(Container)((props?: any) => ({
-  height: "60px",
+  height: "100px",
   width: "100vw",
-  padding: "14px 10px",
+  padding: "28px 10px",
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   backgroundColor: "var(--white)",
   color: "var(--black)",
 }));
-export const MenuList = styled("div")((props?: any) => ({
+export const MenuList = styled(Link)((props?: any) => ({
+  fontSize:'20px',
+  fontWeight:500,
+  letterSpacing:'1px',
   padding: "0px 20px",
   marginLeft: "10px",
   marginRight: "10px",

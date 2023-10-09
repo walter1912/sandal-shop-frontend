@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   ButtonMain,
   FormField,
@@ -16,22 +16,17 @@ import CustomPopover from "../../components/popover";
 import { authRequest } from "~/services/auth/authRequest";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
 import { useRouter } from "next/navigation";
+import { useAuthSuccess } from "~/lib/hooks/useAuthSuccess";
 
 const LoginWithAccount = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
-  const response = useAppSelector((state) => state.response);
 
 
   async function postData(values: loginDto) {
     await authRequest.login(values, dispatch);
   }
-  // sau khi dang nhap thi se chuyen toi trang chu
-  useEffect(() => {
-    setTimeout(() => {
-      if (response.type === "success" && response.toast) router.push("/");
-    }, 1000);
-  }, [response]);
+  useAuthSuccess();
+  
   return (
     <PageContained bgcolor="var(--white)">
       <Link href="/">Sandal Shop</Link>

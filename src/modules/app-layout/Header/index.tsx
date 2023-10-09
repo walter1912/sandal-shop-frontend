@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //material UI
 import { Divider, IconButton, InputAdornment } from "@mui/material";
@@ -19,23 +19,24 @@ import { Contained, SearchForm, MenuList } from "./custom-mui";
 import { Imgs } from "~/assets";
 import Image from "next/image";
 import logo from "~/assets/images/logo.png";
+import { useAppSelector } from "~/lib/store/hook";
 const Header = (props?: any) => {
+  const auth = useAppSelector((state) => state.auth);
   return (
     <>
       <Contained>
-        <Link className="main logo" href="/">
+        <Link className="main-logo" href="/">
           <Image
             alt="Logo"
             src={logo}
             style={{
               width: "80px",
               height: "auto",
+              marginRight: "100px",
             }}
           />
         </Link>
-        <MenuList>
-          <MenuDialog />
-        </MenuList>
+
         <SearchForm
           type={"search"}
           focus="true"
@@ -60,44 +61,28 @@ const Header = (props?: any) => {
             </InputAdornment>
           }
           label=""
-          placeholder="Search IMDb"
+          placeholder="Tìm kiếm sản phẩm"
         />
-        <MenuList>
-        <Image
-            alt="Logo"
-            src={logo}
-            style={{
-              width: "60px",
-              height: "auto",
-            }}
-          />
-        </MenuList>
+
         <Divider
           orientation="vertical"
           flexItem
           sx={{ borderLeftWidth: "1px", borderColor: "var(--white)" }}
         />
-        <MenuList>
+
+        <MenuList href={"/cart"}>
           <FactCheck />
           <span>Giỏ hàng</span>
         </MenuList>
+
         {/* login hoặc sign in */}
         {false ? (
-          <Link href="/login/option">
-            <MenuList>
-              <span>Sign In</span>
-            </MenuList>
-          </Link>
-        ) : (
-          <MenuList>
-            <AccountMenu />
+          <MenuList href={"/login"}>
+            <span>Đăng nhập</span>
           </MenuList>
+        ) : (
+          <MenuList href={"/profile"}>{auth.username}</MenuList>
         )}
-
-        <MenuList>
-          <span>EN</span>
-          <ArrowDropDown />
-        </MenuList>
       </Contained>
       <Divider />
     </>
