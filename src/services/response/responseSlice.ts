@@ -38,6 +38,12 @@ export const responseSlice = createSlice({
         }
         state.toast = true;
       },
+      warningAlert(state, action) {
+        const {message} = action.payload;
+        state.type = "warning";
+        state.message = message;
+        state.toast = true;
+      }
   },
 });
 

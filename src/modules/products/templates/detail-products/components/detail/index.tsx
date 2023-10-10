@@ -1,7 +1,6 @@
 "use client";
 import { Box, Chip, Divider, Rating } from "@mui/material";
-import { edgeServerAppPaths } from "next/dist/build/webpack/plugins/pages-manifest-plugin";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Product } from "~/models/product";
 import "./style.css";
 import {
@@ -9,46 +8,71 @@ import {
   ButtonOutlined,
   ButtonText,
 } from "~/modules/global-styles/custom-mui";
+import { prod } from "~/assets/fake-data/productcart";
+import { BoxDetailStyles } from "./custom-mui";
+import { useAppDispatch } from "~/lib/store/hook";
+import { responseActions } from "~/services/response/responseSlice";
 
-function Detail({ data }: { data: Product[] }) {
+function Detail({
+  data,
+  currentProduct,
+  setCurrentProduct,
+}: {
+  data: Product[];
+  currentProduct: Product;
+  setCurrentProduct: Function;
+}) {
+  const dispatch = useAppDispatch();
+
   const [quantity, setQuantity] = useState<number>(0);
   const [sizeChoosed, setSize] = useState<number>(36);
-  const [typeChoosed, setType] = useState<string>("vàng");
+  const [typeChoosed, setType] = useState<string>("");
   const [couponChoosed, setCoupon] = useState<number[]>([]);
-  let product = data[0];
-  let sizes = [36, 37, 38, 37, 40];
-  let typeElements = ["vàng", "đen", "trắng", "trắng - đen", "đen - trắng"];
-  product.star = 3.4;
-  product.reviews = 30;
+  let product = data[0] ?? prod;
+  let sizes = [36, 37, 38, 39, 40];
+  // var typeElements = ["vàng", "đen", "trắng", "trắng - đen", "đen - trắng"];
+  const [typeElements, setTypeElements] = useState<string[]>([]);
+  let listCoupon: string[] = currentProduct.coupon.split(",");
+  useEffect(() => {
+    setTypeElements((pre) => {
+      return data.map((product: Product, index: number) => {
+        let des = "";
+        if (product.element.sandal.color == product.element.sole.color) {
+          des = product.element.sandal.color;
+        } else {
+          des = product.element.sandal.color + " " + product.element.sole.color;
+        }
+        console.log("des:", des, index);
+        return des;
+      });
+    });
+  }, []);
+
+  function handleAddToCart() {
+    const payload = {
+      product: currentProduct,
+      quantity,
+      size: sizeChoosed,
+      type: typeChoosed,
+      coupon: couponChoosed.map((id: number, index: number) => listCoupon[id]),
+    };
+    let message = "";
+    if (payload.quantity <= 0) {
+      message += "\n Phải chọn trên 1 sản phẩm!";
+    }
+    if (!sizes.includes(payload.size)) {
+      message += "\n Phải chọn size dép!";
+    }
+    if (payload.type == "") {
+      message += "\n Phải chọn loại sản phẩm!";
+    }
+    dispatch(responseActions.warningAlert({message}));
+    if (message === "") alert(JSON.stringify(payload));
+  }
+
   return (
     <div>
-      <Box
-        sx={{
-          marginBottom: "20px",
-          display: "flex",
-          flexDirection: "column",
-          "& div.feature": {
-            marginTop: "20px",
-          },
-          "& .MuiChip-root": {
-            fontSize: "20px",
-            cursor: "pointer",
-            border: "1px solid transparent",
-            marginLeft: "20px",
-            // "&:hover": {
-            //   borderColor: "var(--orange)",
-            // },
-          },
-          "& .MuiChip-root.typeElement": {
-            borderColor: "var(--color-hover)",
-            borderRadius: "4px",
-            background: "transparent",
-            // "&:hover": {
-            //   borderColor: "var(--orange)",
-            // },
-          },
-        }}
-      >
+      <Box sx={BoxDetailStyles}>
         <h2>{product.name}</h2>
         <div
           className="cost feature"
@@ -60,7 +84,7 @@ function Detail({ data }: { data: Product[] }) {
           {product.cost} ₫
         </div>
         <div className="coupon feature">
-          {product.coupon.split(",").map((cou: string, index: number) => (
+          {listCoupon.map((cou: string, index: number) => (
             <Chip
               label={cou}
               key={index}
@@ -69,17 +93,17 @@ function Detail({ data }: { data: Product[] }) {
                   ? "var(--orange)!important"
                   : "",
               }}
-              onClick={(e: any) => (  
-                  setCoupon((pre) => {
-                      if (pre.includes(index)) {
-                          let res = pre.filter((c) => c !== index);
-                          return res;
-                        }
-                        pre.push(index);
-                        return pre;
-                    })
-                    )
-                }
+              onClick={(e: any) =>
+                setCoupon((prev) => {
+                  let pre = [...prev];
+                  if (pre.includes(index)) {
+                    let res = pre.filter((c) => c !== index);
+                    return res;
+                  }
+                  pre.push(index);
+                  return pre;
+                })
+              }
             />
           ))}
         </div>
@@ -88,7 +112,6 @@ function Detail({ data }: { data: Product[] }) {
             <Chip
               label={size}
               key={index}
-              
               sx={{
                 borderRadius: "50%!important",
                 borderColor:
@@ -108,7 +131,10 @@ function Detail({ data }: { data: Product[] }) {
                 borderColor:
                   des === typeChoosed ? "var(--orange)!important" : "",
               }}
-              onClick={() => setType(des)}
+              onClick={() => {
+                setCurrentProduct(data[index]);
+                setType(des);
+              }}
             />
           ))}
         </div>
@@ -138,7 +164,9 @@ function Detail({ data }: { data: Product[] }) {
           <ButtonMain sx={{ width: "200px!important", marginRight: "20px" }}>
             Mua ngay
           </ButtonMain>
-          <ButtonOutlined>Thêm vào giỏ hàng</ButtonOutlined>
+          <ButtonOutlined onClick={handleAddToCart}>
+            Thêm vào giỏ hàng
+          </ButtonOutlined>
         </div>
       </Box>
       <Divider />

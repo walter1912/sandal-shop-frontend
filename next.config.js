@@ -15,6 +15,13 @@ const nextConfig = {
         port: '',
         pathname: '/media/catalog/product/**',
       },
+      // https://i.pinimg.com/564x/3b/48/df/3b48df32bcc35fcaaec9b8bef9410178.jpg
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

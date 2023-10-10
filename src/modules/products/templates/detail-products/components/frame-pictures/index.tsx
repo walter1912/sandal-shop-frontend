@@ -6,9 +6,20 @@ import CustomSlider from "~/modules/global-components/CustomSlider";
 import SlideImage from "./SlideImage";
 import { log } from "console";
 
-function FramePictrure({ data, styles }: { data: Product[]; styles: object }) {
-  const [currentProduct, setCurrentProduct] = useState<Product>(data[0]);
-  const [currentData, setCurrentData] = useState<number[]>([0, 1, 2, 3, 4]);
+function FramePictrure({
+  data,
+  styles,
+  currentProduct,
+  setCurrentProduct,
+}: {
+  data: Product[];
+  styles: object;
+  currentProduct: Product;
+  setCurrentProduct: Function;
+}) {
+  const [currentData, setCurrentData] = useState<number[]>(
+    data.map((p: any, index: number) => index)
+  );
   const {
     width = 450,
     height = 450,
@@ -30,19 +41,15 @@ function FramePictrure({ data, styles }: { data: Product[]; styles: object }) {
         element.style.borderColor = "transparent";
       });
       element.addEventListener("mouseover", () => {
-        //  element.setAttribute('cursor', 'pointer');
         element.style.cursor = "pointer";
         element.style.borderColor = "var(--blue)";
-        // console.log('key: ',  element.getAttribute('data-key'));
-
-        // element.getAttribute('data-key')
         setCurrentProduct(data[element.getAttribute("data-key")]);
       });
     });
   }, []);
 
   return (
-    <div className='flex-column-center'>
+    <div className="flex-column-center">
       <Image
         src={String(currentProduct.img)}
         alt={String(currentProduct.element.des)}
@@ -63,7 +70,7 @@ function FramePictrure({ data, styles }: { data: Product[]; styles: object }) {
             key={index}
             src={data[p].img}
             alt={String(data[p].element.des)}
-            data-key={index}
+            data-key={p}
             width={childSize}
             height={childSize}
             // priority={true}

@@ -1,12 +1,12 @@
 import React from 'react';
 import DetailProduct from '~/modules/products/templates/detail-products';
 
-function DetailProductPage() {
+function Page({ params }: { params: { name: string } }) {
     return (
         <div>
-            <DetailProduct />
+            <DetailProduct name={params.name} />
         </div>
     );
 }
 
-export default DetailProductPage;
+export default Page;
