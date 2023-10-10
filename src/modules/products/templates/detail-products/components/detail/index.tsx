@@ -12,6 +12,7 @@ import { prod } from "~/assets/fake-data/productcart";
 import { BoxDetailStyles } from "./custom-mui";
 import { useAppDispatch } from "~/lib/store/hook";
 import { responseActions } from "~/services/response/responseSlice";
+import { cartRequest } from "~/services/cart/cartRequest";
 
 function Detail({
   data,
@@ -48,13 +49,13 @@ function Detail({
     });
   }, []);
 
-  function handleAddToCart() {
+  async function handleAddToCart() {
     const payload = {
-      product: currentProduct,
+      idProduct: currentProduct._id,
       quantity,
       size: sizeChoosed,
       type: typeChoosed,
-      coupon: couponChoosed.map((id: number, index: number) => listCoupon[id]),
+      coupon: couponChoosed.map((id: number, index: number) => listCoupon[id]).join(', '),
     };
     let message = "";
     if (payload.quantity <= 0) {
@@ -66,8 +67,14 @@ function Detail({
     if (payload.type == "") {
       message += "\n Phải chọn loại sản phẩm!";
     }
-    dispatch(responseActions.warningAlert({message}));
-    if (message === "") alert(JSON.stringify(payload));
+    if (message === "") {
+      await cartRequest.addProductCart(payload, dispatch);
+      alert(JSON.stringify(payload));
+
+    } 
+    else {
+      dispatch(responseActions.warningAlert({message}));
+    }
   }
 
   return (

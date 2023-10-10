@@ -11,10 +11,11 @@ export interface ProductCart {
   quantity: number;
 
   coupon: string;
-
+  size?: number;
+  type?: string;
   price: number;
-// khi có idBill thì productCart trở thành productBill 
-// khi isBought = true thì productBill trở thành productBought
+  // khi có idBill thì productCart trở thành productBill
+  // khi isBought = true thì productBill trở thành productBought
   isBought?: boolean;
   idBill?: string;
 }

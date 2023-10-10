@@ -2,13 +2,17 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { Box, Checkbox, List, TextField } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProductCart } from "~/models/productCart";
 import ProductCartItem from "../../components/ProductCartItem";
 import { ButtonMain, ButtonOutlined } from "~/modules/global-styles/custom-mui";
 import { productCart, productCart2 } from "~/assets/fake-data/productcart";
+import { cartRequest } from "~/services/cart/cartRequest";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
 
 function CustomerCart() {
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart);
   const [couponChoosed, setCouponChoosed] = useState<string>("");
   const [listProductBill, setListProductBill] = useState<string[]>([]);
 
@@ -16,6 +20,14 @@ function CustomerCart() {
     productCart,
     productCart2,
   ]);
+  useEffect(() => {
+    cartRequest.getCart(dispatch);
+    setListProductcart((pre) => {
+      let res = [...pre, ...cart.listProductCart];
+      return res;
+    });
+  }, []);
+
   function handleDeleteProductCart(idProductCart: string) {
     setListProductcart((pre) =>
       pre.filter((pro: ProductCart) => pro?.id !== idProductCart)

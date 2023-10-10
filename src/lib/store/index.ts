@@ -3,6 +3,8 @@ import authReducer from "~/services/auth/authSlice";
 import responseReducer from "~/services/response/responseSlice";
 import couponsReducer from '~/services/coupons/couponsSlice';
 import productsReducer from '~/services/products/productsSlice';
+import cartReducer from '~/services/cart/cartSlice';
+
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,7 @@ const store = configureStore({
     response: responseReducer,
     coupons: couponsReducer,
     products: productsReducer,
+    cart: cartReducer,
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself

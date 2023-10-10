@@ -22,7 +22,7 @@ function ProductCartItem({
     <Box component="div" className="productCartItem" sx={BoxLayoutStyle}>
       <Image
         src={
-          "https://routine.vn/media/catalog/product/cache/9eb3bb38848a3053921b46e4936c5b10/a/o/ao-unisex-10f23hodu003_beige_1__3.jpg"
+         String( product?.img)
         }
         alt={"anhr tamj thoi"}
         width={width}
@@ -33,7 +33,7 @@ function ProductCartItem({
       <div className="main-infor">
         <h4 className="name">{product?.name}</h4>
         <div className="des">
-          {product?.element.des}, {product?.size}
+          type: {productCart.type}, size: {productCart.size}
         </div>
         <Box
           component="div"
@@ -57,7 +57,7 @@ function ProductCartItem({
           )}
         </Box>
         <div className="price flex-row-center currentcy">
-          {productCart.price}
+          {product?.cost ? quantity * product?.cost : productCart.price}
           <span>₫</span>
         </div>
       </div>
