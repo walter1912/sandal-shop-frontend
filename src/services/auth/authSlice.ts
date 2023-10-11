@@ -35,7 +35,7 @@ export const authSlice = createSlice({
       state.access_token = access_token;
       setLocalStorage("access_token", access_token);
     },
-    logout(state, action) {
+    logout(state) {
       state.access_token = "";
       state.refresh_token = "";
       removeLocalStorage("access_token");

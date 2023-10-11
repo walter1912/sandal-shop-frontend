@@ -52,10 +52,13 @@ export const authRequest = {
       dispatch(responseActions.otherMethods(err));
     }
   },
-  refreshToken: async function (refreshToken: Object, dispatch: Function) {
+  refreshToken: async function (refresh_token: string, dispatch: Function) {
     try {
       let url = `auth/refreshToken`;
-      const res: any = await axiosInstance.post(url, refreshToken);
+      let body = {
+        refresh_token
+      }
+      const res: any = await axiosInstance.post(url, body);
       dispatch(authActions.refreshToken(res.data));
       dispatch(responseActions.createMethod(res));
     } catch (err) {

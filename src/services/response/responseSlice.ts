@@ -24,26 +24,32 @@ export const responseSlice = createSlice({
     },
     createMethod(state, action) {
       console.log("payload response: ", action.payload);
-      
-        const { status, data } = action.payload;
+
+      const { status, data } = action.payload;
       console.log("data response: ", status, data);
 
-        state.status = status;
-        state.message = data.message;
-        state.data = data;
-        if (state.status === 201) {
-          state.type = "success";
-        } else {
-          state.type = "error";
-        }
-        state.toast = true;
-      },
-      warningAlert(state, action) {
-        const {message} = action.payload;
-        state.type = "warning";
-        state.message = message;
-        state.toast = true;
+      state.status = status;
+      state.message = data.message;
+      state.data = data;
+      if (state.status === 201) {
+        state.type = "success";
+      } else {
+        state.type = "error";
       }
+      state.toast = true;
+    },
+    warningAlert(state, action) {
+      const { message } = action.payload;
+      state.type = "warning";
+      state.message = message;
+      state.toast = true;
+    },
+    toastify(state, action) {
+      const { message, type } = action.payload;
+      state.type = type;
+      state.message = message;
+      state.toast = true;
+    },
   },
 });
 

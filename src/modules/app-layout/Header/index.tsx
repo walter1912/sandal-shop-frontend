@@ -20,6 +20,7 @@ import { Imgs } from "~/assets";
 import Image from "next/image";
 import logo from "~/assets/images/logo.png";
 import { useAppSelector } from "~/lib/store/hook";
+import { getLocalStorage } from "~/lib/utils/localStorage";
 const Header = (props?: any) => {
   const auth = useAppSelector((state) => state.auth);
   return (
@@ -76,8 +77,8 @@ const Header = (props?: any) => {
         </MenuList>
 
         {/* login hoặc sign in */}
-        {false ? (
-          <MenuList href={"/login"}>
+        {getLocalStorage('auth') == undefined ? (
+          <MenuList href={"/auth/login"}>
             <span>Đăng nhập</span>
           </MenuList>
         ) : (

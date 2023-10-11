@@ -95,6 +95,10 @@ mở rộng: chưa có api lẫn ui
 4. thêm tính năng viết bài viết đánh giá cho khách hàng (cái này mình đã làm r nên copy lại là đc)
 5. CHỨC NĂNG THÔNG BÁO (chưa hình dung được nó ntn => nên chắc hơi lâu)
 
+ngày 11/10: 
+target: 
+1. product to bill
+2. tính phí ship
 
  
 
