@@ -28,7 +28,7 @@ function ProductCartItem({
   const { product  }  = productCart;
 
 async function handleUpdateProductCart(){
-  let price = currentProduct.quantity * product.cost;
+  let price = currentProduct.quantity * Number(product?.cost);
   await cartRequest.updateProductCart({...currentProduct, price: price}, dispatch);
 }
 
