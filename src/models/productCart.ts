@@ -2,7 +2,7 @@ import { Customer } from "./customer";
 import { Product } from "./product";
 
 export interface ProductCart {
-  id?: string;
+  _id?: string;
   idCustomer?: string;
   customer?: Customer;
   idProduct?: string;

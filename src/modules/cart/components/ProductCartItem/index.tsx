@@ -7,6 +7,7 @@ import { BoxFrameSetQuantityStyle, BoxLayoutStyle } from "./styles";
 import { ButtonText } from "~/modules/global-styles/custom-mui";
 import { cartRequest } from "~/services/cart/cartRequest";
 import { useAppDispatch } from "~/lib/store/hook";
+import { Product } from "~/models/product";
 
 function ProductCartItem({
   productCart,
@@ -24,10 +25,11 @@ function ProductCartItem({
     useState<ProductCart>(productCart);
   let width = 124;
   let height = 170;
-  const { product } = productCart;
+  const { product  }  = productCart;
 
 async function handleUpdateProductCart(){
-  await cartRequest.updateProductCart(currentProduct, dispatch);
+  let price = currentProduct.quantity * product.cost;
+  await cartRequest.updateProductCart({...currentProduct, price: price}, dispatch);
 }
 
   return (
@@ -50,7 +52,7 @@ async function handleUpdateProductCart(){
           className="flex-row-center"
           sx={BoxFrameSetQuantityStyle}
         >
-          {listProductBill.includes(String(productCart.id)) ? (
+          {listProductBill.includes(String(productCart._id)) ? (
             <>
               <span>Số lượng: {currentProduct.quantity}</span>
             </>
@@ -95,13 +97,13 @@ async function handleUpdateProductCart(){
       </div>
 
       <div className="handle_ProductCart">
-        {listProductBill.includes(String(productCart.id)) ? (
+        {listProductBill.includes(String(productCart._id)) ? (
           ""
         ) : (
         <>
             <IconButton
               className="delete_productCart"
-              onClick={() => handleDeleteProductCart(productCart.id)}
+              onClick={() => handleDeleteProductCart(productCart._id)}
             >
               <Delete />
             </IconButton>

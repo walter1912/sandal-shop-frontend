@@ -4,6 +4,7 @@ import { getLocalStorage, setLocalStorage } from "~/lib/utils/localStorage";
 const initialState = {
   current: getLocalStorage("currentBill") ?? {},
   listBill: getLocalStorage("listBill") ?? [],
+  currrentProductCarts: getLocalStorage("currrentProductCarts") ?? [],
 };
 
 export const billsSlice = createSlice({
@@ -21,6 +22,10 @@ export const billsSlice = createSlice({
     setListBill(state, action) {
       state.listBill = action.payload;
       setLocalStorage("listBill", state.listBill);
+    },
+    setCurrrentProductCarts(state, action) {
+      state.currrentProductCarts = action.payload;
+      setLocalStorage("currrentProductCarts", state.currrentProductCarts);
     },
   },
 });

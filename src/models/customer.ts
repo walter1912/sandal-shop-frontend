@@ -1,5 +1,6 @@
 export interface Customer {
-    id?: string;
+    _id?: string;
+    id?:string;
     username: string;
     password?:string;
     rePassword?: string;

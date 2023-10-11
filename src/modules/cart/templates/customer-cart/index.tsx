@@ -9,6 +9,9 @@ import { ButtonMain, ButtonOutlined } from "~/modules/global-styles/custom-mui";
 import { productCart, productCart2 } from "~/assets/fake-data/productcart";
 import { cartRequest } from "~/services/cart/cartRequest";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
+import { cartActions } from "~/services/cart/cartSlice";
+import { useRouter } from "next/navigation";
+import { responseActions } from "~/services/response/responseSlice";
 
 function CustomerCart() {
   const dispatch = useAppDispatch();
@@ -30,13 +33,23 @@ function CustomerCart() {
 
   function handleDeleteProductCart(idProductCart: string) {
     setListProductcart((pre) =>
-      pre.filter((pro: ProductCart) => pro?.id !== idProductCart)
+      pre.filter((pro: ProductCart) => pro?._id !== idProductCart)
     );
   }
-  function handleAddProductCartToBill(){
-    
-  }
 
+  const router = useRouter();
+  function handleCartToBill() {
+    dispatch(cartActions.setListIdproductBill(listProductBill));
+    router.push("/pending-bill");
+    setTimeout(() => {
+      dispatch(
+        responseActions.toastify({
+          message: "Đang chuyển tới trang thanh toán",
+          type: "success",
+        })
+      );
+    }, 1000);
+  }
   return (
     <div>
       <h2 className="flex-row-center">
@@ -55,10 +68,10 @@ function CustomerCart() {
                     setListProductBill((pre: string[]) => {
                       const updatedList: string[] = [...pre];
                       if (e.target.checked) {
-                        updatedList.push(String(productCart.id));
+                        updatedList.push(String(productCart._id));
                       } else {
                         const index = updatedList.indexOf(
-                          String(productCart.id)
+                          String(productCart._id)
                         );
                         if (index !== -1) {
                           updatedList.splice(index, 1);
@@ -85,7 +98,7 @@ function CustomerCart() {
           </List>
           <div>Đã thêm {listProductBill.length} sản phẩm </div>
           <div className="flex-column-center">
-            <ButtonMain>Thanh toán</ButtonMain>
+            <ButtonMain onClick={handleCartToBill}>Thanh toán</ButtonMain>
           </div>
         </Grid2>
       </Grid2>

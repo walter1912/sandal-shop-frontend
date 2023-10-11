@@ -1,6 +1,6 @@
 export interface Product {
-    reviews?: number;
-    id?: string;
+  reviews?: number;
+  _id?: string;
   name: string;
   element: {
     sole: { color: string; material: string };
@@ -23,5 +23,4 @@ export interface Product {
   bought?: number;
 
   size?: number;
-
 }

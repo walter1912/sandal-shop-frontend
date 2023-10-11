@@ -3,6 +3,7 @@ import { responseActions } from "../response/responseSlice";
 import { getLocalStorage } from "~/lib/utils/localStorage";
 import axiosInstance from "~/lib/utils/axiosInstance";
 import { cartActions } from "./cartSlice";
+import { productsRequest } from "../products/productsRequest";
 
 export const cartRequest = {
   addProductCart: async function (data: any, dispatch: Function) {
@@ -56,13 +57,32 @@ export const cartRequest = {
   addProductBill: async function (data: any, dispatch: Function) {},
   updateProductCart: async function (data: ProductCart, dispatch: Function) {
     try {
-      let url = `cart/items/${data.id}`;
+      let url = `cart/items/${data._id}`;
       const res = await axiosInstance.put(url, data);
       // if (res.status === 200) {
       //   dispatch(cartActions.addProductBill(res.data.productCart));
       // }
     } catch (err) {
       dispatch(responseActions.otherMethods(err));
+    }
+  },
+
+  getProductCart: async function (id: string) {
+    try {
+      let url = `cart/items/${id}`;
+      const res = await axiosInstance.get(url);
+      if (res.status == 200) {
+        const { productCart } = res.data;
+        const product = await productsRequest.getById(productCart.idProduct);
+        let productBill = {
+          ...productCart,
+          product,
+        };
+        return productBill;
+      }
+      return undefined;
+    } catch (err) {
+      console.log(err);
     }
   },
 };

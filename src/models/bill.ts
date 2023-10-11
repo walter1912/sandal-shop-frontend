@@ -12,7 +12,7 @@ export enum TypePay {
   on = "Thanh toán online",
 }
 export interface Bill {
-  id?: string;
+  _id?: string;
   idCustomer: string;
   ship: number;
   coupon: string;
@@ -28,10 +28,11 @@ export interface Bill {
 
   createAt: Date;
   updateAt: Date;
+  couponUsed?: string[];
 }
 
 export let productBill1: ProductCart = {
-  id: "3123",
+  _id: "3123",
   idCustomer: "1912",
   // customer:  ,
   idProduct: "1",
@@ -43,7 +44,7 @@ export let productBill1: ProductCart = {
   idBill: "1",
 };
 export let productBill2: ProductCart = {
-  id: "3124",
+  _id: "3124",
   idCustomer: "1912",
   // customer:  ,
   idProduct: "1",
@@ -58,7 +59,7 @@ export let productBill2: ProductCart = {
 export const listProductBill: ProductCart[] = [productCart, productCart2];
 
 export let bill1: Bill = {
-    id: "1",
+    _id: "1",
     idCustomer: "1912",
     ship: 10000,
     coupon: "SALE10",
@@ -78,7 +79,7 @@ let productBought2: ProductCart = productBill2;
 productBought2.isBought = true;
 
 export let bill2: Bill = {
-    id: "1",
+    _id: "1",
     idCustomer: "1912",
     ship: 10000,
     coupon: "SALE10",

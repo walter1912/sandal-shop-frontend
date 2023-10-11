@@ -26,4 +26,13 @@ export const productsRequest = {
       dispatch(responseActions.otherMethods(err));
     }
   },
+  getById: async function (id: string) {
+    try {
+      let url = `products/${id}`;
+      let res = await axiosInstance.get(url);
+      return res.data.product;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

@@ -55,7 +55,10 @@ function Detail({
       quantity,
       size: sizeChoosed,
       type: typeChoosed,
-      coupon: couponChoosed.map((id: number, index: number) => listCoupon[id]).join(', '),
+      coupon: couponChoosed
+        .map((id: number, index: number) => listCoupon[id])
+        .join(", "),
+      price: quantity * currentProduct.cost,
     };
     let message = "";
     if (payload.quantity <= 0) {
@@ -70,10 +73,8 @@ function Detail({
     if (message === "") {
       await cartRequest.addProductCart(payload, dispatch);
       alert(JSON.stringify(payload));
-
-    } 
-    else {
-      dispatch(responseActions.warningAlert({message}));
+    } else {
+      dispatch(responseActions.warningAlert({ message }));
     }
   }
 

@@ -1,7 +1,7 @@
-
 export interface Review {
-    idCustomer: string;
-    username?:string;
-    idProduct: string;
-    content: string;
-  }
+  _id?: string;
+  idCustomer: string;
+  username?: string;
+  idProduct: string;
+  content: string;
+}

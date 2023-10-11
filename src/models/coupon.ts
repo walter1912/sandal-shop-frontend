@@ -1,4 +1,5 @@
 export interface CouponDto {
+    _id?: string;
     code: string;
     name: string;
     percent: number;

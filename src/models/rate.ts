@@ -1,6 +1,6 @@
-
 export interface Rate {
-    idCustomer: string;
-    idProduct: string;
-    star: number;
-  }
+  _id?: string;
+  idCustomer: string;
+  idProduct: string;
+  star: number;
+}
