@@ -33,6 +33,9 @@ function CustomerCart() {
       pre.filter((pro: ProductCart) => pro?.id !== idProductCart)
     );
   }
+  function handleAddProductCartToBill(){
+    
+  }
 
   return (
     <div>

@@ -38,6 +38,7 @@ export const cartRequest = {
           let result = {
             product: resProduct.data.product,
             ...productCart,
+            id: productCart._id,
           };
           console.log("result: ", result);
 
@@ -47,6 +48,19 @@ export const cartRequest = {
 
         dispatch(cartActions.setCart(listProductCart));
       }
+    } catch (err) {
+      dispatch(responseActions.otherMethods(err));
+    }
+  },
+
+  addProductBill: async function (data: any, dispatch: Function) {},
+  updateProductCart: async function (data: ProductCart, dispatch: Function) {
+    try {
+      let url = `cart/items/${data.id}`;
+      const res = await axiosInstance.put(url, data);
+      // if (res.status === 200) {
+      //   dispatch(cartActions.addProductBill(res.data.productCart));
+      // }
     } catch (err) {
       dispatch(responseActions.otherMethods(err));
     }

@@ -19,6 +19,11 @@ export const cartSlice = createSlice({
         setCart(state, action) {
             state.listProductCart = action.payload;
             setLocalStorage("listProductCart", state.listProductCart);
+        },
+        addProductBill(state, action) {
+            const productBill = action.payload
+            state.listProductBill.push(productBill);
+            setLocalStorage("listProductBill", state.listProductBill);
         }
     }
 })

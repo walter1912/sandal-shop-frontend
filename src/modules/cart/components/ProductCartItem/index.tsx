@@ -4,6 +4,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { ProductCart } from "~/models/productCart";
 import { BoxFrameSetQuantityStyle, BoxLayoutStyle } from "./styles";
+import { ButtonText } from "~/modules/global-styles/custom-mui";
+import { cartRequest } from "~/services/cart/cartRequest";
+import { useAppDispatch } from "~/lib/store/hook";
 
 function ProductCartItem({
   productCart,
@@ -14,16 +17,23 @@ function ProductCartItem({
   handleDeleteProductCart: Function;
   listProductBill: string[];
 }) {
-  const [quantity, setQuantity] = useState<number>(productCart.quantity);
+
+  const dispatch = useAppDispatch();
+
+  const [currentProduct, setCurrentProduct] =
+    useState<ProductCart>(productCart);
   let width = 124;
   let height = 170;
   const { product } = productCart;
+
+async function handleUpdateProductCart(){
+  await cartRequest.updateProductCart(currentProduct, dispatch);
+}
+
   return (
     <Box component="div" className="productCartItem" sx={BoxLayoutStyle}>
       <Image
-        src={
-         String( product?.img)
-        }
+        src={String(product?.img)}
         alt={"anhr tamj thoi"}
         width={width}
         height={height}
@@ -42,22 +52,44 @@ function ProductCartItem({
         >
           {listProductBill.includes(String(productCart.id)) ? (
             <>
-              <span>Số lượng: {quantity}</span>
+              <span>Số lượng: {currentProduct.quantity}</span>
             </>
           ) : (
             <>
-              <div onClick={() => setQuantity((quantity) => quantity - 1)}>
+              <div
+                onClick={() => {
+                  setCurrentProduct((pre) => {
+                    let newProduct: ProductCart = {
+                      ...pre,
+                      quantity: pre.quantity - 1,
+                    };
+                    return newProduct;
+                  });
+                }}
+              >
                 -
               </div>
-              <div>{quantity}</div>
-              <div onClick={() => setQuantity((quantity) => quantity + 1)}>
+              <div>{currentProduct.quantity}</div>
+              <div
+                onClick={() =>
+                  setCurrentProduct((pre) => {
+                    let newProduct: ProductCart = {
+                      ...pre,
+                      quantity: pre.quantity + 1,
+                    };
+                    return newProduct;
+                  })
+                }
+              >
                 +
               </div>
             </>
           )}
         </Box>
         <div className="price flex-row-center currentcy">
-          {product?.cost ? quantity * product?.cost : productCart.price}
+          {product?.cost
+            ? currentProduct.quantity * product?.cost
+            : productCart.price}
           <span>₫</span>
         </div>
       </div>
@@ -66,12 +98,21 @@ function ProductCartItem({
         {listProductBill.includes(String(productCart.id)) ? (
           ""
         ) : (
-          <IconButton
-            className="delete_productCart"
-            onClick={() => handleDeleteProductCart(productCart.id)}
-          >
-            <Delete />
-          </IconButton>
+        <>
+            <IconButton
+              className="delete_productCart"
+              onClick={() => handleDeleteProductCart(productCart.id)}
+            >
+              <Delete />
+            </IconButton>
+            {currentProduct.quantity === productCart.quantity ? (
+              <></>
+            ) : (
+              <ButtonText
+              onClick={handleUpdateProductCart}
+              >Lưu thay đổi</ButtonText>
+            )}
+          </>
         )}
       </div>
     </Box>
