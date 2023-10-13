@@ -3,7 +3,7 @@ import { productCart, productCart2 } from "~/assets/fake-data/productcart";
 export enum StatePay {
   pending = "pending",
   empty = "empty",
-  shiping = "shiping",
+  shiping = "shipping",
   received = "received",
   refund = "refund",
 }
@@ -26,8 +26,8 @@ export interface Bill {
   listIdproductCart?: string[];
   listProductBill?: ProductCart[];
 
-  createAt: Date;
-  updateAt: Date;
+  createdAt?: any;
+  updatedAt?: any;
   couponUsed?: string[];
 }
 
@@ -69,8 +69,8 @@ export let bill1: Bill = {
     statePay: StatePay.pending,
     typePay: TypePay.off,
     listProductBill: listProductBill,
-    createAt: new Date(),
-    updateAt: new Date()
+    // createAt: new Date().toUTCString(),
+    // updateAt: new Date().toUTCString()
 };
 
 let productBought1: ProductCart = productBill1;
@@ -89,6 +89,6 @@ export let bill2: Bill = {
     statePay: StatePay.shiping,
     typePay: TypePay.off,
     listProductBill: [productBought1, productBought2],
-    createAt: new Date(),
-    updateAt: new Date()
+    // createAt: new Date(),
+    // updateAt: new Date()
 };

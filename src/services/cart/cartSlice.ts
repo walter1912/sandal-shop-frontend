@@ -6,6 +6,7 @@ const initialState = {
   listProductCart: getLocalStorage("listProductCart") ?? [],
   listIdProductBill: getLocalStorage("listIdProductBill") ?? [],
   listProductBought: getLocalStorage("listProductBought") ?? [],
+  listProductBill: getLocalStorage("listProductBill") ?? [],
 };
 export const cartSlice = createSlice({
   name: "cart",
@@ -23,6 +24,14 @@ export const cartSlice = createSlice({
     setListIdproductBill(state, action) {
       state.listIdProductBill = action.payload;
       setLocalStorage("listIdProductBill", state.listIdProductBill);
+    },
+    setListProductBought(state, action) {
+      state.listProductBought = action.payload;
+      setLocalStorage("listProductBought", state.listProductBought);
+    },
+    setListProductBill(state, action) {
+      state.listProductBill = action.payload;
+      setLocalStorage("listProductBill", state.listProductBill);
     },
   },
 });

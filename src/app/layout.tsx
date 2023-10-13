@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body>
+      <body  style={{backgroundColor:'#fafafa', padding:'20px 0'}}>
         <Provider store={store}>
           <AppLayout>
             {children}

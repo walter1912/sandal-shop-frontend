@@ -24,6 +24,7 @@ import { billsActions } from "~/services/bills/billsSlice";
 import { PendingBill } from "~/models/pending-bill";
 import { billsRequest } from "~/services/bills/billsRequest";
 import { Bill } from "~/models/bill";
+import { useRouter } from "next/navigation";
 
 function PendingBillTemplate() {
   const dispatch = useAppDispatch();
@@ -103,13 +104,23 @@ function PendingBillTemplate() {
       typePay,
     };
     alert(JSON.stringify(pendingBill));
-    const bill = await billsRequest.createPendingBill(pendingBill, dispatch);
-    if (bill) {
-      setBill(bill);
-    }
+    const newBill = await billsRequest.createPendingBill(pendingBill, dispatch);
+    console.log("bill: ", bill);
+    console.log("newBill: ", newBill);
+
+    
+    setBill(newBill);
+    
     checkPendingBill(false);
   }
-  async function saveBill() {}
+  const response = useAppSelector((state) => state.response);
+  const router = useRouter();
+  async function saveBill() {
+    const { status } = await billsRequest.saveBill(bill._id, dispatch);
+    if (status == 200) {
+      router.push("/bills");
+    }
+  }
   return (
     <div>
       <Grid2 container spacing={6}>
@@ -249,20 +260,21 @@ function PendingBillTemplate() {
                 <>
                   <span>Các mã giảm giá được áp dụng:</span>
                   <ul>
-                    {bill.couponUsed?.length > 0 && bill.couponUsed.map((cou: string, index: number) => {
-                      if (cou != "") {
-                        return (
-                          <Chip
-                            key={index}
-                            label={cou}
-                            color="success"
-                            variant="outlined"
-                            style={{ marginRight: "6px" }}
-                          />
-                        );
-                      }
-                      return <></>;
-                    })}
+                    {bill.couponUsed?.length > 0 &&
+                      bill.couponUsed.map((cou: string, index: number) => {
+                        if (cou != "") {
+                          return (
+                            <Chip
+                              key={index}
+                              label={cou}
+                              color="success"
+                              variant="outlined"
+                              style={{ marginRight: "6px" }}
+                            />
+                          );
+                        }
+                        return <></>;
+                      })}
                   </ul>
                   <span className="calc-cost">
                     Được giảm giá:{" "}

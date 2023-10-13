@@ -4,6 +4,7 @@ import { getLocalStorage } from "~/lib/utils/localStorage";
 import axiosInstance from "~/lib/utils/axiosInstance";
 import { cartActions } from "./cartSlice";
 import { productsRequest } from "../products/productsRequest";
+import { listProduct } from "~/assets/fake-data/product";
 
 export const cartRequest = {
   addProductCart: async function (data: any, dispatch: Function) {
@@ -46,7 +47,27 @@ export const cartRequest = {
           listProductCart.push(result);
         }
         console.log("listProductCart: ", listProductCart);
+       let listCart = [];
+       let listBill = [];
+       let listBought = [];
+       for(let i = 0; i < listProductCart.length; i++) {
+        let p : any = listProductCart[i];
+        if(p.idBill === undefined ) {
+          listCart.push(p)
+        }else {
+          if(p.isBought === false) {
+            listBill.push(p)
+          }else {
+            listBought.push(p)
+          }
+        }
+       }
+        console.log("listCart: ", listCart);
+        console.log("listBill: ", listBill);
 
+        console.log("listBought: ", listBought);
+
+        
         dispatch(cartActions.setCart(listProductCart));
       }
     } catch (err) {

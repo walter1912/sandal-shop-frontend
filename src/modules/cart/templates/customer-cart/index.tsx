@@ -25,10 +25,7 @@ function CustomerCart() {
   ]);
   useEffect(() => {
     cartRequest.getCart(dispatch);
-    setListProductcart((pre) => {
-      let res = [...pre, ...cart.listProductCart];
-      return res;
-    });
+    setListProductcart(cart.listProductCart);
   }, []);
 
   function handleDeleteProductCart(idProductCart: string) {

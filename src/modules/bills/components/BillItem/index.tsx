@@ -1,6 +1,8 @@
 "use state";
 import { List } from "@mui/icons-material";
 import { Card, Divider } from "@mui/material";
+import dayjs from 'dayjs';
+import moment from "moment/moment";
 import React from "react";
 import { productCart } from "~/assets/fake-data/productcart";
 import { Bill, StatePay } from "~/models/bill";
@@ -9,6 +11,8 @@ import ProductCartItem from "~/modules/cart/components/ProductCartItem";
 import { ButtonOutlined, ButtonText } from "~/modules/global-styles/custom-mui";
 
 function BillItem({ bill }: { bill: Bill }) {
+  console.log("bill.createAt: ",bill.createdAt );
+  
   let message = "Bill trống";
   let btnOutlined = "xem saản phẩm";
   switch (bill.statePay) {
@@ -25,6 +29,7 @@ function BillItem({ bill }: { bill: Bill }) {
       btnOutlined = "Mua sản phẩm khác";
       break;
   }
+  
   return (
     <Card
       sx={{
@@ -55,7 +60,7 @@ function BillItem({ bill }: { bill: Bill }) {
     >
       <div className="header">
         <span className="createAt">
-          Hóa đơn tạo ngày {bill.createAt.toISOString()}
+          Hóa đơn tạo lúc {moment(bill.createdAt).utcOffset(7).format('DD-MM-YYYY HH:mm:ss')} 
         </span>
         <span className="statePay">{bill.statePay}</span>
       </div>
@@ -73,14 +78,14 @@ function BillItem({ bill }: { bill: Bill }) {
               key={index}
               productCart={productBill}
               handleDeleteProductCart={() => {}}
-              listProductBill={[String(productBill.id)]}
+              listProductBill={[String(productBill._id)]}
             />
           )
         )}
         <ProductCartItem
           productCart={productCart}
           handleDeleteProductCart={() => {}}
-          listProductBill={[String(productCart.id)]}
+          listProductBill={[String(productCart._id)]}
         />
       </div>
       <div className="total">
