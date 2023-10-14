@@ -35,4 +35,32 @@ export const productsRequest = {
       console.log(err);
     }
   },
+  filterByOptions: async function (
+    {
+      data,
+      sortOption,
+      isOr = true,
+    }: {
+      data: {
+        type: string;
+        value: string;
+      }[];
+      sortOption: string;
+      isOr?: boolean;
+    },
+    dispatch: Function
+  ) {
+    try {
+      let url = "products/filter";
+      let dataSearch = { data, sortOption, isOr };
+      let res = await axiosInstance.post(url, dataSearch);
+      dispatch(responseActions.otherMethods(res));
+      // if (res.status === 200) {
+      //   dispatch(productsAction.setProductsName(res.data.productNames));
+      // }
+      return res.data.productNames;
+    } catch (err) {
+      dispatch(responseActions.otherMethods(err));
+    }
+  },
 };

@@ -1,7 +1,7 @@
 import { Product } from "~/models/product";
 
 export let product: Product = {
-    id: "id",
+    _id: "id",
     name: "Dép tông loại một",
     element: {
       sole: {
@@ -23,7 +23,7 @@ export let product: Product = {
     bought: 100,
   };
 export const product2 =  {
-  id: "id",
+  _id: "id",
   name: "Dép tông loại hai",
   element: {
     sole: {
