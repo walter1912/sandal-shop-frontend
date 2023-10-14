@@ -2,12 +2,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Card } from "@mui/material";
-import { ConfirmationNumber, Gesture, ListAlt, Photo } from "@mui/icons-material";
+import {
+  ConfirmationNumber,
+  Gesture,
+  ListAlt,
+  Photo,
+} from "@mui/icons-material";
 import { CouponDto } from "~/models/coupon";
 import Image from "next/image";
 import styles from "./coupon.module.css";
 import Icon from "./icon";
 import { ButtonText } from "~/modules/global-styles/custom-mui";
+import { useRouter } from "next/navigation";
 // import IconPlay from '../IconPlay';
 // code: "",
 // name: "",
@@ -18,7 +24,10 @@ import { ButtonText } from "~/modules/global-styles/custom-mui";
 // countUsed: 0
 const CouponItem = ({ coupon }: { coupon: CouponDto }) => {
   let { code, name, img, percent, countUsed } = coupon;
-
+  const router = useRouter();
+  function handleUseCoupon() {
+    router.push(`/coupons/${code}`);
+  }
   return (
     <Card
       className={styles.coupon}
@@ -71,16 +80,15 @@ const CouponItem = ({ coupon }: { coupon: CouponDto }) => {
           }}
         >
           <ConfirmationNumber />
-          <span>
-            {countUsed} lượt đã dùng
-          </span>
+          <span>{countUsed} lượt đã dùng</span>
         </Box>
       </div>
       {/* <CardContent> */}
-      <span style={{margin: '10px 10px'}}>{name}</span>
-    
-        <ButtonText sx={{padding:'20px'}}> Sử dụng</ButtonText>
-    
+      <span style={{ margin: "10px 10px" }}>{name}</span>
+
+      <ButtonText sx={{ padding: "20px" }} onClick={handleUseCoupon}>
+        Sử dụng
+      </ButtonText>
     </Card>
   );
 };

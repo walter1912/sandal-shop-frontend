@@ -1,6 +1,7 @@
 "use client";
 import { ArrowForwardIosOutlined } from "@mui/icons-material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 // import { listCoupon } from "~/assets/fake-data/coupon";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
@@ -12,8 +13,9 @@ import { couponsRequest } from "~/services/coupons/couponsRequest";
 
 function TopCoupon() {
   const dispatch = useAppDispatch();
-  const coupons = useAppSelector(state => state.coupons);
-  useEffect(()=> {
+  const coupons = useAppSelector((state) => state.coupons);
+  const router = useRouter();
+  useEffect(() => {
     couponsRequest.getTopCoupon(dispatch);
   }, []);
   return (
@@ -24,11 +26,16 @@ function TopCoupon() {
       >
         <SectionTitle title={"Top mã giảm giá hot"} />
 
-        <ButtonText sx={{ color: "var(--blue)", fontSize: "1.1rem" }}>
+        <ButtonText
+          sx={{ color: "var(--blue)", fontSize: "1.1rem" }}
+          onClick={() => {
+            router.push("/coupons");
+          }}
+        >
           <span>Xem tất cả</span>
           <ArrowForwardIosOutlined />
         </ButtonText>
-      </div>
+      </div>  
       <CustomSlider width={"860px"}>
         {coupons.top
           .reduce<number[]>((result, cp, index) => {

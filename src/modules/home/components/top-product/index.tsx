@@ -1,5 +1,6 @@
 import { ArrowForwardIosOutlined } from "@mui/icons-material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { listProduct } from "~/assets/fake-data/product";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
@@ -11,7 +12,8 @@ import { productsRequest } from "~/services/products/productsRequest";
 
 function TopProduct() {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(state => state.products);
+  const products = useAppSelector((state) => state.products);
+  const router = useRouter();
   useEffect(() => {
     productsRequest.findAllProduct(dispatch);
   }, []);
@@ -23,7 +25,12 @@ function TopProduct() {
       >
         <SectionTitle title={"Sản phẩm bán chạy"} />
 
-        <ButtonText sx={{ color: "var(--blue)", fontSize: "1.1rem" }}>
+        <ButtonText
+          sx={{ color: "var(--blue)", fontSize: "1.1rem" }}
+          onClick={() => {
+            router.push("/products");
+          }}
+        >
           <span>Xem tất cả</span>
           <ArrowForwardIosOutlined />
         </ButtonText>

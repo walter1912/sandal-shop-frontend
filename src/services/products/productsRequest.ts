@@ -63,4 +63,16 @@ export const productsRequest = {
       dispatch(responseActions.otherMethods(err));
     }
   },
+  getProductHaveCoupon: async function (codeCoupon: string, dispatch: Function) {
+    try{
+      let url = `products/coupon/${codeCoupon}`;
+      let res = await axiosInstance.get(url);
+      dispatch(responseActions.otherMethods(res));
+      if(res.status == 200) {
+        dispatch(productsAction.setCurrentProduct(res.data.productNames));
+      }
+    }  catch (err) {
+      dispatch(responseActions.otherMethods(err));
+    }
+  }
 };
