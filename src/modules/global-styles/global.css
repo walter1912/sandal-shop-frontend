@@ -1,0 +1,41 @@
+.color-main {
+  color: #f5c518;
+}
+.color-white {
+  color: var(--white);
+}
+.color-black {
+  color: var(--black);
+}
+.hover-main:hover {
+  color: #f5c518;
+}
+.border-main {
+  border-color: #f5c518;
+}
+.border-white {
+  border-color: var(--white);
+}
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  justify-content: center;
+}
+.currentcy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--orange);
+}
+.currentcy span {
+  font-size: 1.6em;
+  padding-bottom: -4px;
+}

@@ -1,0 +1,16 @@
+a, a:active, a:visited {
+    text-decoration: none;
+}
+
+li, ul {
+    list-style-type: none;
+}
+.MuiTooltip-popper {
+    height: 20px;
+    /* top: -10px !important; */
+}
+.MuiTooltip-tooltip {
+      color: var(--color-bg);
+      background-color: transparent;
+      /* color: black!important; */
+  }

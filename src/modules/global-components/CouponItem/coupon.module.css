@@ -1,0 +1,25 @@
+/* Định dạng border cho coupon */
+.coupon {
+    position: relative; /* Để có thể sử dụng ::before và ::after pseudo-elements */
+    width: 200px; /* Độ rộng của coupon */
+    padding: 10px; /* Khoảng cách bên trong border */
+    text-align: center; /* Căn giữa nội dung trong coupon */
+    font-size: 18px; /* Cỡ chữ trong coupon */
+    font-weight: bold; /* Độ đậm của chữ */
+    color: #333; /* Màu chữ */
+    background-color: #fff; /* Màu nền của coupon */
+  }
+  
+  /* Tạo border bên trái */
+  .coupon::before {
+    content: ""; /* Để tạo một phần tử rỗng */
+    position: absolute;
+    top: 0;
+    left: -20px; /* Khoảng cách từ border bên trái */
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 0 20px 20px; /* Kích thước và hình dạng của border tam giác */
+    border-color: transparent transparent transparent #3498db; /* Màu sắc của border tam giác */
+  }
+  

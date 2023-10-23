@@ -1,5 +1,5 @@
 {
-  "name": "frontend-sandal-project",
+  "name": "sandal-shop-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,16 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "13.5.4"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/lab": "^5.0.0-alpha.147",
+    "@mui/material": "^5.14.10",
+    "@mui/x-date-pickers": "^6.15.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/node": "20.6.3",
+    "@types/react": "18.2.22",
+    "@types/react-dom": "18.2.7",
+    "@types/react-redux": "^7.1.26",
+    "autoprefixer": "10.4.16",
+    "axios": "^1.5.0",
+    "dayjs": "^1.11.10",
+    "eslint": "8.49.0",
+    "eslint-config-next": "13.5.2",
+    "formik": "^2.4.5",
+    "material-ui-popup-state": "^5.0.9",
+    "moment": "^2.29.4",
+    "next": "13.5.2",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-redux": "^8.1.2",
+    "react-toastify": "^9.1.3",
+    "typescript": "5.2.2",
+    "yup": "^1.2.0"
   }
 }
