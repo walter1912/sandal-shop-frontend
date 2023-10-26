@@ -1,10 +1,10 @@
 import React from 'react';
-import CRUDProduct from '~/modules/admin/templates/product';
+import ManagementProduct from '~/modules/admin/templates/product';
 
 function AdminProductsPage() {
     return (
         <div>
-            <CRUDProduct />
+            <ManagementProduct />
         </div>
     );
 }

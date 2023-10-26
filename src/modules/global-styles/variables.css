@@ -13,6 +13,8 @@ body {
 
 :root {
     --color-main: #f5c518;
+    --yellow: #f4d978;
+
     --color-secondary: #33c5f3;
     --color-bg: #f0efef;
     --color-hover: #d9d7d7;
@@ -23,5 +25,7 @@ body {
     --blue: #5799ef;
     --red: #e02828;
     --orange: #ee4d2d;
+    /* --shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    --shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
   

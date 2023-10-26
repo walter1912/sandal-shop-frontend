@@ -1,17 +1,29 @@
-'use client'
-import React from 'react';
-import PropTypes from 'prop-types';
+"use client";
+import React from "react";
+import PropTypes from "prop-types";
+import ListProducts from "./components/list-products";
+import { ButtonText } from "~/modules/global-styles/custom-mui";
+import { Add } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
-CRUDProduct.propTypes = {
-    
-};
 
-function CRUDProduct() {
-    return (
-        <div>
-            trang này có CRUD sản phẩm và xem danh sách sản phẩm
-        </div>
-    );
+function ManagementProduct() {
+    const router = useRouter();
+    function addNewProductName(){
+        router.push('products/create-product')
+    }
+  return (
+    <div 
+    >
+      <ButtonText
+      onClick={addNewProductName}
+      >
+        <Add />
+        <span>thêm mới sản phẩm</span>
+      </ButtonText>
+      <ListProducts />
+    </div>
+  );
 }
 
-export default CRUDProduct;
+export default ManagementProduct;

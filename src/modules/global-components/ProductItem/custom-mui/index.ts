@@ -7,6 +7,7 @@ export const CardStyled = styled(Card)(
     height: `calc(${height}px + 150px)`,
     postion: "relative",
     backgroundColor: "var(--white)",
+    boxShadow:"var(--shadow)",
     display: "flex",
     flexDirection: "column",
     margin: "10px",

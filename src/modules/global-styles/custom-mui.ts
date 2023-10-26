@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "@emotion/styled";
-import { Alert, Button, Container, TextField } from "@mui/material";
+import { Alert, Box, Button, Container, TextField } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Form } from "formik";
 
@@ -32,10 +32,11 @@ export const FormStyled = styled(Form)((props) => ({
     borderColor: "var(--color-main)",
   },
 }));
-export const FormField = styled("div")((props) => ({
+export const FormField = styled(Box)((props) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
+  fontSize:"20px",
   "& label": {
     fontWeight: "500",
     marginBottom: "4px",
@@ -46,7 +47,7 @@ export const TextFieldStyled = styled(TextField)((props) => ({
   width: "100%",
   marginBottom: "16px",
   ".MuiInputBase-root": {
-    height: "32px",
+    height: "40px",
     minWidth: "316px",
   },
   ".MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
