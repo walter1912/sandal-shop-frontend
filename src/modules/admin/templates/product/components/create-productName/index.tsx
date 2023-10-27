@@ -21,11 +21,15 @@ import { formats, modules } from "./props";
 import { decode, encode } from "html-entities";
 import {
   FormControlLabel,
+  FormHelperText,
   InputAdornment,
   Radio,
   RadioGroup,
 } from "@mui/material";
 import Image from "next/image";
+import { productsRequest } from "~/services/products/productsRequest";
+import { useAppDispatch } from "~/lib/store/hook";
+import { firebaseRequest } from "~/services/firebase/firebaseRequest";
 
 const initialValues: ProductName = {
   name: "",
@@ -48,41 +52,57 @@ async function convertToBase64(file: any) {
   });
 }
 function CreateProductName() {
+  const dispatch = useAppDispatch();
   const [editorHtml, setEditorHtml] = useState<any>("");
   const [thumbnail, setThumbnail] = useState<any>("");
 
-  async function handleUploadImg(e: any) {
+  async function handleUploadImg(e: any, values: any) {
     const file = e.target.files[0];
-    const codeImg = await convertToBase64(file);
-    setThumbnail(codeImg);
+    // const codeImg = await convertToBase64(file);
+    values.img = file;
+    setThumbnail(file);
   }
 
+  async function handleCreateProductName(values: any) {
+    const img = await firebaseRequest.uploadImage(values.img);
+    
+    let productName: ProductName = {
+      name: values.name,
+      code: values.code,
+      detail: values.detail,
+      img: String(img),
+      cost: values.cost,
+      style: values.style,
+    };
+
+    await productsRequest.createProductName(productName, dispatch);
+  }
   return (
-    <div className="flex-column-center">
+    <div
+      className="flex-column-center"
+      style={{
+        backgroundColor: "var(--white)",
+        padding: "40px",
+        borderRadius: "6px",
+        boxShadow: "var(--shadow)",
+      }}
+    >
       <h2>Thêm mới sản phẩm</h2>
       <Formik
         initialValues={initialValues}
-        // validationSchema={createProductNameSchema}
+        validationSchema={createProductNameSchema}
         onSubmit={function (
           values: FormikValues,
           formikHelpers: FormikHelpers<FormikValues>
-        ): void | Promise<any> {
-          values.detail = encode(editorHtml);
-          values.img = thumbnail;
+        ) {
           console.log("img: ", values.img);
 
           window.alert(JSON.stringify(values));
+          handleCreateProductName(values);
         }}
       >
         {({ touched, values, handleChange, handleSubmit }) => (
-          <Form
-            style={{
-              backgroundColor: "var(--white)",
-              padding: "40px",
-              borderRadius: "6px",
-              boxShadow: "var(--shadow)",
-            }}
-          >
+          <Form>
             <FormField>
               <label>Tên sản phẩm</label>
               <TextFieldStyled
@@ -92,6 +112,17 @@ function CreateProductName() {
                 onChange={handleChange}
                 placeholder="Nhập tên sản phẩm"
                 helperText={touched.name && <ErrorMessage name="name" />}
+              />
+            </FormField>
+            <FormField>
+              <label>Mã sản phẩm</label>
+              <TextFieldStyled
+                name="code"
+                error={touched.code}
+                value={values.code}
+                onChange={handleChange}
+                placeholder="Nhập mã sản phẩm"
+                helperText={touched.code && <ErrorMessage name="code" />}
               />
             </FormField>
             <FormField
@@ -115,6 +146,7 @@ function CreateProductName() {
               <ReactQuill
                 value={editorHtml}
                 onChange={(e) => {
+                  values.detail = encode(editorHtml);
                   setEditorHtml(e);
                 }}
                 modules={modules}
@@ -132,7 +164,7 @@ function CreateProductName() {
                 value={values.cost}
                 onChange={handleChange}
                 placeholder="Nhập giá sản phẩm"
-                helperText={touched.name && <ErrorMessage name="name" />}
+                helperText={touched.cost && <ErrorMessage name="cost" />}
                 type="number"
                 color="error"
                 InputProps={{
@@ -177,20 +209,41 @@ function CreateProductName() {
                   label="Ba quai"
                 />
               </RadioGroup>
+              {touched.style && (
+                <ErrorMessage
+                  name="style"
+                  render={(msg) => (
+                    <FormHelperText error={true}>{msg}</FormHelperText>
+                  )}
+                />
+              )}
             </FormField>
             <FormField>
               <label htmlFor="inforImg">
-                <img src={thumbnail || ""} alt="fdADS" width={360} height={240}/>
+                <img
+                  src={thumbnail || ""}
+                  alt="fdADS"
+                  width={360}
+                  height={240}
+                />
                 Thêm ảnh sản phẩm
               </label>
               <input
                 type="file"
                 name="img"
                 id="inforImg"
-                onChange={(e) => handleUploadImg(e)}
+                onChange={(e) => handleUploadImg(e, values)}
                 accept=".jpg,  .png, .jpeg, .svg"
-                style={{ display: "none " }}
+                style={{ display: "none" }}
               />
+              {touched.img && (
+                <ErrorMessage
+                  name="img"
+                  render={(msg) => (
+                    <FormHelperText error={true}>{msg}</FormHelperText>
+                  )}
+                />
+              )}
             </FormField>
 
             <ButtonMain sx={{ marginTop: "40px" }} onClick={handleSubmit}>

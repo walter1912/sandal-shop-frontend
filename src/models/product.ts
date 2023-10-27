@@ -13,7 +13,7 @@ export interface Product {
   stock: number;
 
   cost: number;
-
+             
   coupon: string;
 
   star: number;

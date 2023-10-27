@@ -21,7 +21,7 @@ const createProductNameSchema = Yup.object({
   detail: Yup.string().required("Bạn phải viết bài giới thiệu sản phẩm"),
   img: Yup.string().required("Bạn phải chọn 1 đại diện cho sản phẩm"),
   style: Yup.string().required("Bạn phải chọn style cho sản phẩm"),
-  cost: Yup.number().required("Bạn phải nhập giá sản phẩm"),
+  cost: Yup.number().required("Bạn phải nhập giá sản phẩm").moreThan(1000),
 });
 
 export default createProductNameSchema;

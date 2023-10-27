@@ -1,6 +1,7 @@
 import axiosInstance from "~/lib/utils/axiosInstance";
 import { responseActions } from "../response/responseSlice";
 import { productsAction } from "./productsSlice";
+import { ProductName } from "~/models/productName";
 
 export const productsRequest = {
   findAllProduct: async function (dispatch: Function) {
@@ -63,16 +64,36 @@ export const productsRequest = {
       dispatch(responseActions.otherMethods(err));
     }
   },
-  getProductHaveCoupon: async function (codeCoupon: string, dispatch: Function) {
-    try{
+  getProductHaveCoupon: async function (
+    codeCoupon: string,
+    dispatch: Function
+  ) {
+    try {
       let url = `products/coupon/${codeCoupon}`;
       let res = await axiosInstance.get(url);
       dispatch(responseActions.otherMethods(res));
-      if(res.status == 200) {
+      if (res.status == 200) {
         dispatch(productsAction.setCurrentProduct(res.data.productNames));
       }
-    }  catch (err) {
+    } catch (err) {
       dispatch(responseActions.otherMethods(err));
     }
-  }
+  },
+
+  // CRUD admin
+  createProductName: async function (
+    productName: ProductName,
+    dispatch: Function
+  ) {
+    try {
+      let url = "products/names";
+      let res = await axiosInstance.post(url, productName);
+      dispatch(responseActions.otherMethods(res));
+      if (res.status == 201) {
+        dispatch(productsAction.setCurrentProductName(res.data.productName));
+      }
+    } catch (err) {
+      dispatch(responseActions.otherMethods(err));
+    }
+  },
 };
