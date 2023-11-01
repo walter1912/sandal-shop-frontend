@@ -30,6 +30,7 @@ import Image from "next/image";
 import { productsRequest } from "~/services/products/productsRequest";
 import { useAppDispatch } from "~/lib/store/hook";
 import { firebaseRequest } from "~/services/firebase/firebaseRequest";
+import { useRouter } from "next/navigation";
 
 const initialValues: ProductName = {
   name: "",
@@ -39,20 +40,11 @@ const initialValues: ProductName = {
   cost: 0,
   style: "",
 };
-async function convertToBase64(file: any) {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-}
+
 function CreateProductName() {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const [editorHtml, setEditorHtml] = useState<any>("");
   const [thumbnail, setThumbnail] = useState<any>("");
 
@@ -64,8 +56,8 @@ function CreateProductName() {
   }
 
   async function handleCreateProductName(values: any) {
-    const img = await firebaseRequest.uploadImage(values.img);
-    
+    const img = await firebaseRequest.uploadImage(values.img, values.name);
+
     let productName: ProductName = {
       name: values.name,
       code: values.code,
@@ -75,7 +67,12 @@ function CreateProductName() {
       style: values.style,
     };
 
-    await productsRequest.createProductName(productName, dispatch);
+    const res:any = await productsRequest.createProductName(productName, dispatch);
+    if (res.status == 201) {
+      setTimeout(() => {
+        router.push("/admin/products/create-product");
+      }, 2000);
+    }
   }
   return (
     <div

@@ -16,7 +16,7 @@ export interface Product {
              
   coupon: string;
 
-  star: number;
+  star?: number;
 
   img: string;
 

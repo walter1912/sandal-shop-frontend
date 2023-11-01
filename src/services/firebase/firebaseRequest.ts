@@ -1,14 +1,13 @@
-import { child } from "firebase/database";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { app } from "~/lib/utils/firebaseInstance";
 
 export const firebaseRequest = {
-  uploadImage: async function (file: any)  {
+  uploadImage: async function (file: any, nameProduct: string)  {
     try {
       const storage = getStorage(app);
 
       // Tạo tham chiếu đến nơi bạn muốn lưu trữ ảnh
-      const imageRef = ref(storage, "images/" + file.name);
+      const imageRef = ref(storage, "products/" + nameProduct + "/imgs/"+ file.name);
 
       // Tải ảnh lên Firebase Storage
       // 'file' comes from the Blob or File API
@@ -19,5 +18,5 @@ export const firebaseRequest = {
     } catch (err) {
       console.log(err);
     }
-  },
+  }
 };

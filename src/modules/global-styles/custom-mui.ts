@@ -45,6 +45,7 @@ export const FormField = styled(Box)((props) => ({
 
 export const TextFieldStyled = styled(TextField)((props) => ({
   width: "100%",
+  background:"var(--color-input)",
   marginBottom: "16px",
   ".MuiInputBase-root": {
     height: "40px",

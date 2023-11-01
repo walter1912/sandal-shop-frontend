@@ -2,6 +2,7 @@ import axiosInstance from "~/lib/utils/axiosInstance";
 import { responseActions } from "../response/responseSlice";
 import { productsAction } from "./productsSlice";
 import { ProductName } from "~/models/productName";
+import { Product } from "~/models/product";
 
 export const productsRequest = {
   findAllProduct: async function (dispatch: Function) {
@@ -92,8 +93,22 @@ export const productsRequest = {
       if (res.status == 201) {
         dispatch(productsAction.setCurrentProductName(res.data.productName));
       }
+      return res;
     } catch (err) {
       dispatch(responseActions.otherMethods(err));
+      return err;
+    }
+  },
+
+  createProduct: async function (product: Product, dispatch: Function) {
+    try {
+      let url = "products";
+      let res = await axiosInstance.post(url, product);
+      dispatch(responseActions.otherMethods(res));
+      return res;
+    } catch (err) {
+      dispatch(responseActions.otherMethods(err));
+      return err;
     }
   },
 };

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 function ManagementProduct() {
     const router = useRouter();
     function addNewProductName(){
-        router.push('products/create-product')
+        router.push('products/create-product-name')
     }
   return (
     <div 

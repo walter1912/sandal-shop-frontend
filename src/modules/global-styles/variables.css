@@ -19,7 +19,8 @@ body {
     --color-bg: #f0efef;
     --color-hover: #d9d7d7;
     --white: #fff;
-    --white-second: rgba(255, 255, 255, 0.7);
+    --white-second: #ffffffe6;
+    --color-input:#f0efef;
     --black: #2c2c2c;
     --black-second: #535252;
     --blue: #5799ef;
