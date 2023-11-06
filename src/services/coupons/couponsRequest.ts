@@ -1,6 +1,7 @@
 import axiosInstance from "~/lib/utils/axiosInstance";
 import { couponsActions } from "./couponsSlice";
 import { responseActions } from "../response/responseSlice";
+import { CouponDto } from "~/models/coupon";
 
 export const couponsRequest = {
   getAllCoupon: async function (dispatch: Function) {
@@ -23,6 +24,18 @@ export const couponsRequest = {
         }
     } catch(err) {
         dispatch(responseActions.otherMethods(err));
+    }
+  },
+  createCoupon: async function (data: any, dispatch: Function) {
+    try {
+      let url = "coupons/admin";
+      const res = await axiosInstance.post(url, data);
+      if(res.status == 201) {
+        dispatch(couponsActions.addOne(res.data.coupon));
+      }
+    } catch(err) {
+      console.log(err);
+      
     }
   }
 };

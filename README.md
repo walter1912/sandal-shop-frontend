@@ -101,6 +101,16 @@ target:
 1. product to bill
 2. tính phí ship
 
- 
+ngày 2/11:
+target: done admin dashboard 
+1. update + delete product
+=> dựa vào trang create-product
+3. thống kê khách hàng 
+=> lấy danh sách khách hàng 
+khi nhấn vào khách hàng thì hiển thị ra bảng danh danh sách hóa đơn 
+4. thống kê sản phẩm trong giỏ hàng
+có 2 loại thống kê : số lượng sản phẩm của khách hàng trong giỏ hàng, số lượng sản phẩm đã mua của khách hàng trong giỏ hàng.
+
+
 
     

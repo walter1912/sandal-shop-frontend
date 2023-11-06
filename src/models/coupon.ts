@@ -8,4 +8,5 @@ export interface CouponDto {
     end: Date;
     countUsed: number;
     img?:string;
+    maxUse?: number;
 }

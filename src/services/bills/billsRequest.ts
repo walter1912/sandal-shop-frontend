@@ -57,16 +57,16 @@ export const billsRequest = {
       if (res.status === 200) {
         const { bills } = res.data;
         console.log("bills in billrequest: ", bills);
-        
+
         let newBills: Bill[] = [];
         for (let i = 0; i < bills.length; i++) {
           let newBill: Bill = { ...bills[i] };
           let url = `cart/${customer.id}/idBill/${bills[i]._id}`;
           const resBill = await axiosInstance.get(url);
-          
+
           if (resBill.status === 200) {
             const { listProductBill } = resBill.data;
-            console.log("listProductBill in billrequest: ", listProductBill );
+            console.log("listProductBill in billrequest: ", listProductBill);
             let newListProductBill = [];
             for (let j = 0; j < listProductBill.length; j++) {
               let productBill = await cartRequest.getProductCart(
@@ -90,6 +90,17 @@ export const billsRequest = {
       }
     } catch (err) {
       console.log(err);
+    }
+  },
+  adminGetBills: async function () {
+    try {
+      let url = "statistic-bills";
+
+      let res = await axiosInstance.get(url);
+      return res.data.bills;
+    } catch (err) {
+      console.log(err);
+      return []
     }
   },
 };

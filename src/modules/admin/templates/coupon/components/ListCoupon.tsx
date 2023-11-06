@@ -13,13 +13,15 @@ import { useAppDispatch, useAppSelector } from "~/lib/store/hook";
 import { Cancel, Delete, Edit, Save } from "@mui/icons-material";
 import { Product } from "~/models/product";
 import { GridActionsCellItemStyled } from "~/modules/admin/custom-mui";
+import { couponsRequest } from "~/services/coupons/couponsRequest";
+import moment from "moment";
 
-export default function ListProducts() {
-  const products = useAppSelector((state) => state.products);
+export default function ListCoupon() {
+  const coupons = useAppSelector((state) => state.coupons);
   const dispatch = useAppDispatch();
   //   lấy danh sách sản phẩm
   useEffect(() => {
-    productsRequest.findAllProduct(dispatch);
+    couponsRequest.getAllCoupon(dispatch);
   }, []);
 
   //  phần CRUD
@@ -29,33 +31,55 @@ export default function ListProducts() {
   function handleDeleteClick(id: GridRowId) {
     window.alert(id);
   }
-
+  /*
+export interface CouponDto {
+    _id?: string;
+    code: string;
+    name: string;
+    percent: number;
+    maxDiscount:number;
+    start: Date;
+    end: Date;
+    countUsed: number;
+    img?:string;
+}
+*/
   const columns: GridColDef[] = [
     { field: "stt", headerName: "STT", width: 40 },
-    { field: "name", headerName: "Tên sản phẩm", width: 160 },
-    { field: "color", headerName: "Màu sắc", width: 240, sortable: false },
+    { field: "code", headerName: "Code", width: 80 },
+    { field: "name", headerName: "Tên mã", width: 240, sortable: false },
     {
-      field: "style",
-      headerName: "Kiểu dáng",
-      sortable: false,
+      field: "percent",
+      headerName: "Tỉ lệ(%)",
+      type: "number",
+      width: 60,
+    },
+    {
+      field: "maxDiscount",
+      headerName: "Tối đa(đ)",
       width: 80,
     },
     {
-      field: "coupon",
-      headerName: "Mã giảm giá",
-      sortable: false,
-
-      width: 200,
+      field: "batdau",
+      headerName: "Ngày bắt đầu",
+      type: "number",
+      width: 180,
     },
     {
-      field: "cost",
-      headerName: "Giá",
+      field: "ketthuc",
+      headerName: "Ngày kết thúc",
+      type: "number",
+      width: 180,
+    },
+    {
+      field: "countUsed",
+      headerName: "Số lượt dùng",
       type: "number",
       width: 80,
     },
     {
-      field: "bought",
-      headerName: "Đã bán",
+      field: "maxUse",
+      headerName: "Số lượt tối đa",
       type: "number",
       width: 80,
     },
@@ -63,7 +87,7 @@ export default function ListProducts() {
       field: "actions",
       type: "actions",
       headerName: "Chỉnh sửa",
-      width: 80,
+      width: 40,
       cellClassName: "actions",
       getActions: ({ id }) => {
         return [
@@ -80,11 +104,13 @@ export default function ListProducts() {
   ];
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ minHeight: 400, width: "100%" }}>
       <DataGrid
-        rows={products.all.map((item: any, index: number) => ({
+        rows={coupons.all.map((item: any, index: number) => ({
           stt: index + 1,
           id: item._id,
+          batdau: moment(item.start).format("DD-MM-YY, HH:mm:ss"),
+          ketthuc: moment(item.end).format("DD-MM-YY, HH:mm:ss"),
           ...item,
         }))}
         columns={columns}

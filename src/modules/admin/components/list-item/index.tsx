@@ -23,19 +23,19 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText primary="Sản phẩm" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => router.push("/admin/bills")}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
         <ListItemText primary="Hóa đơn" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton  onClick={() => router.push("/admin/customers")}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Khách hàng" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => router.push("/admin/coupons")}>
         <ListItemIcon>
           <ConfirmationNumber />
         </ListItemIcon>
@@ -46,7 +46,7 @@ export const MainListItems = () => {
 };
 
 export const SecondaryListItems = () => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <React.Fragment>
       <ListSubheader component="div" inset>

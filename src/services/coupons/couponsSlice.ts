@@ -14,6 +14,10 @@ const couponsSlice = createSlice({
   name: "coupons",
   initialState: initialCoupons,
   reducers: {
+    addOne(state, action) {
+      state.all.push(action.payload);
+      setLocalStorage("coupons", state);
+    },
     setAllCoupon(state, action) {
       state.all = action.payload;
       setLocalStorage("coupons", state);
