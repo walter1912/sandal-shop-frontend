@@ -17,9 +17,12 @@ export default function AllBillsTemplate() {
   const [listBill, setListBill] = React.useState<Bill[]>([bill1, bill1]);
   console.log("bills out effect: ", bills);
   useEffect(() => {
-    billsRequest.getAllBill(dispatch);
+    async function get() {
+      await billsRequest.getAllBill(dispatch);
+      setListBill(bills.listBill);
+    }
+    get();
     console.log("bills: ", bills);
-    setListBill(bills.listBill);
   }, []);
   const [value, setValue] = React.useState("1");
 

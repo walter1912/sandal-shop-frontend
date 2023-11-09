@@ -1,20 +1,25 @@
 "use state";
 import { List } from "@mui/icons-material";
 import { Card, Divider } from "@mui/material";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import moment from "moment/moment";
 import React from "react";
-import { productCart } from "~/assets/fake-data/productcart";
+import { u } from "react-router-dom";
+// import { productCart } from "~/assets/fake-data/productcart";
 import { Bill, StatePay } from "~/models/bill";
 import { ProductCart } from "~/models/productCart";
 import ProductCartItem from "~/modules/cart/components/ProductCartItem";
 import { ButtonOutlined, ButtonText } from "~/modules/global-styles/custom-mui";
 
-function BillItem({ bill }: { bill: Bill }) {
-  console.log("bill.createAt: ",bill.createdAt );
-  
+function BillItem({
+  bill,
+}: {
+  bill: Bill;
+}) {
+  console.log("bill.createAt: ", bill.createdAt);
   let message = "Bill trống";
   let btnOutlined = "xem saản phẩm";
+  let isBought = false;
   switch (bill.statePay) {
     case StatePay.pending:
       message = "Thanh toán trước 48h sau khi cho vào hàng chờ";
@@ -23,13 +28,14 @@ function BillItem({ bill }: { bill: Bill }) {
     case StatePay.received:
       message = "Đánh giá sản phẩm";
       btnOutlined = "Mua lại";
+      isBought = true;
       break;
     case StatePay.shiping:
       message = "Theo dõi đơn hàng";
       btnOutlined = "Mua sản phẩm khác";
       break;
   }
-  
+
   return (
     <Card
       sx={{
@@ -60,17 +66,18 @@ function BillItem({ bill }: { bill: Bill }) {
     >
       <div className="header">
         <span className="createAt">
-          Hóa đơn tạo lúc {moment(bill.createdAt).utcOffset(7).format('DD-MM-YYYY HH:mm:ss')} 
+          Hóa đơn tạo lúc{" "}
+          {moment(bill.createdAt).utcOffset(7).format("DD-MM-YYYY HH:mm:ss")}
         </span>
         <span className="statePay">{bill.statePay}</span>
       </div>
       <Divider />
       <div
-        // sx={{
-        //   "& .productCartItem": {
-        //     borderBottom: "1px solid var(--orange)",
-        //   },
-        // }}
+      // sx={{
+      //   "& .productCartItem": {
+      //     borderBottom: "1px solid var(--orange)",
+      //   },
+      // }}
       >
         {bill.listProductBill?.map(
           (productBill: ProductCart, index: number) => (
@@ -79,14 +86,15 @@ function BillItem({ bill }: { bill: Bill }) {
               productCart={productBill}
               handleDeleteProductCart={() => {}}
               listProductBill={[String(productBill._id)]}
+              isBought={isBought}
             />
           )
         )}
-        <ProductCartItem
+        {/* <ProductCartItem
           productCart={productCart}
           handleDeleteProductCart={() => {}}
           listProductBill={[String(productCart._id)]}
-        />
+        /> */}
       </div>
       <div className="total">
         <span>Thành tiền</span>

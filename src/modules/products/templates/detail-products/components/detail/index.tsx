@@ -81,7 +81,7 @@ function Detail({
   return (
     <div>
       <Box sx={BoxDetailStyles}>
-        <h2>{product.name}</h2>
+        <h2>{currentProduct.name}</h2>
         <div
           className="cost feature"
           style={{
@@ -89,7 +89,7 @@ function Detail({
             color: "var(--orange)",
           }}
         >
-          {product.cost} ₫
+          {currentProduct.cost} ₫
         </div>
         <div className="coupon feature">
           {listCoupon.map((cou: string, index: number) => (
@@ -166,7 +166,7 @@ function Detail({
             <div>{quantity}</div>
             <div onClick={() => setQuantity((quantity) => quantity + 1)}>+</div>
           </Box>
-          <div className="stock">{product.stock} sản phẩm có sẵn</div>
+          <div className="stock">{currentProduct.stock} sản phẩm có sẵn</div>
         </div>
         <div className="feature">
           <ButtonMain sx={{ width: "200px!important", marginRight: "20px" }}>
@@ -190,16 +190,16 @@ function Detail({
         }}
       >
         <div className="appreciation">
-          {product.star}
+          {currentProduct.star}
           <Rating
             name="read-only"
-            value={Number(product.star)}
+            value={Number(currentProduct.star)}
             precision={0.25}
             readOnly
           />
         </div>
-        <div className="appreciation">{product.reviews} đánh giá</div>
-        <div className="appreciation">Đã bán {product.bought}</div>
+        <div className="appreciation">{currentProduct.reviews?.length} đánh giá</div>
+        <div className="appreciation">Đã bán {currentProduct.bought}</div>
       </Box>
     </div>
   );

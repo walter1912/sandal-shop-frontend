@@ -1,5 +1,7 @@
+import { Review } from "./review";
+
 export interface Product {
-  reviews?: number;
+  reviews?: Review[];
   _id?: string;
   name: string;
   element: {

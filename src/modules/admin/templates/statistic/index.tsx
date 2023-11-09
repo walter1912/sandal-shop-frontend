@@ -2,7 +2,6 @@ import { Grid, Paper } from '@mui/material';
 import React from 'react';
 import Chart from '../../components/chart';
 import Deposits from '../../components/deposits';
-import Orders from '../../components/orders';
 
 function Statistic() {
     return (
@@ -31,12 +30,6 @@ function Statistic() {
             }}
           >
             <Deposits />
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Orders />
           </Paper>
         </Grid>
       </Grid>

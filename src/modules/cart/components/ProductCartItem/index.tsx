@@ -1,5 +1,5 @@
-import { Delete } from "@mui/icons-material";
-import { Box, Checkbox, Divider, IconButton } from "@mui/material";
+import { AddComment, Delete } from "@mui/icons-material";
+import { Box, Checkbox, Divider, IconButton, Tooltip } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
 import { ProductCart } from "~/models/productCart";
@@ -8,29 +8,42 @@ import { ButtonText } from "~/modules/global-styles/custom-mui";
 import { cartRequest } from "~/services/cart/cartRequest";
 import { useAppDispatch } from "~/lib/store/hook";
 import { Product } from "~/models/product";
+import { useRouter } from "next/navigation";
 
 function ProductCartItem({
   productCart,
   handleDeleteProductCart,
   listProductBill,
+  isBought = false,
 }: {
   productCart: ProductCart;
   handleDeleteProductCart: Function;
   listProductBill: string[];
+  isBought?: boolean;
 }) {
-
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
+  function handleComment() {
+    const productBought = productCart.type + ";" + productCart.size;
+    setTimeout(() => {
+      router.push(
+        `/products/${productCart.product?.name}?productBought=${productBought}&productBoughtId=${productCart.product?._id}`
+      );
+    }, 500);
+  }
   const [currentProduct, setCurrentProduct] =
     useState<ProductCart>(productCart);
   let width = 124;
   let height = 170;
-  const { product  }  = productCart;
+  const { product } = productCart;
 
-async function handleUpdateProductCart(){
-  let price = currentProduct.quantity * Number(product?.cost);
-  await cartRequest.updateProductCart({...currentProduct, price: price}, dispatch);
-}
+  async function handleUpdateProductCart() {
+    let price = currentProduct.quantity * Number(product?.cost);
+    await cartRequest.updateProductCart(
+      { ...currentProduct, price: price },
+      dispatch
+    );
+  }
 
   return (
     <Box component="div" className="productCartItem" sx={BoxLayoutStyle}>
@@ -95,12 +108,24 @@ async function handleUpdateProductCart(){
           <span>₫</span>
         </div>
       </div>
-
+     
       <div className="handle_ProductCart">
+      {isBought && (
+        <ButtonText
+          onClick={(e) => {
+            handleComment();
+          }}
+        >
+          <Tooltip title={"Đánh giá sản phẩm"}>
+            <AddComment />
+          </Tooltip>
+        </ButtonText>
+      )}
+
         {listProductBill.includes(String(productCart._id)) ? (
           ""
         ) : (
-        <>
+          <>
             <IconButton
               className="delete_productCart"
               onClick={() => handleDeleteProductCart(productCart._id)}
@@ -110,9 +135,9 @@ async function handleUpdateProductCart(){
             {currentProduct.quantity === productCart.quantity ? (
               <></>
             ) : (
-              <ButtonText
-              onClick={handleUpdateProductCart}
-              >Lưu thay đổi</ButtonText>
+              <ButtonText onClick={handleUpdateProductCart}>
+                Lưu thay đổi
+              </ButtonText>
             )}
           </>
         )}

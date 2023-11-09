@@ -1,6 +1,6 @@
 export interface Review {
   _id?: string;
-  idCustomer: string;
+  idCustomer?: string;
   username?: string;
   idProduct: string;
   content: string;

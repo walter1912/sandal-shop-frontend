@@ -22,9 +22,6 @@ import {
   MainListItems,
   SecondaryListItems,
 } from "~/modules/admin/components/list-item";
-import Orders from "../../components/orders";
-import Deposits from "../../components/deposits";
-import Chart from "../../components/chart";
 
 function Copyright(props: any) {
   return (

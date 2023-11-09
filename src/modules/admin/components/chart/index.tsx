@@ -10,15 +10,13 @@ function createData(time: string, amount?: number) {
 }
 
 const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
+  createData('1/10', 1000000),
+  createData('5/10', 200000),
+  createData('10/10', 6000000),
+  createData('15/10', 80000),
+  createData('20/10', 155000),
+  createData('25/10', 2000000),
+  createData('30/10', 240000),
 ];
 
 export default function Chart() {
@@ -26,7 +24,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Tháng này</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -55,7 +53,7 @@ export default function Chart() {
                 ...theme.typography.body1,
               }}
             >
-              Sales ($)
+              Doanh thu (đồng)
             </Label>
           </YAxis>
           <Line
