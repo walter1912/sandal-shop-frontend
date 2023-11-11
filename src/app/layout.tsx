@@ -16,7 +16,6 @@ export default function RootLayout({
   children: React.ReactNode; 
 }) {
   const pathname = usePathname();
- 
   return (
     <html lang="vi">
       <body style={{ backgroundColor: "#fafafa", padding: "20px 0" }}>
