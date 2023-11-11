@@ -6,7 +6,7 @@ export const chatbotRequest = {
       let url = `/chatbot/${codeQuestion}`;
       let res = await axiosInstance.get(url);
       return res.data.chatbot.response;
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
       return err.data.message;
     }

@@ -95,12 +95,20 @@ const ChatUI: React.FC = () => {
               position: "relative",
               minHeight: "60px",
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
+              paddingLeft:'20px'
             }}
             component="div"
           >
-            {user ? <></> : <SignIn />}
-
+            {user ? <h4>Xin chào {user.displayName}</h4> : <SignIn />}
+            <a
+              href="https://chat.zalo.me/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{color: 'white'}}
+            >
+              Kết nối qua zalo: 0377241628
+            </a>
             <IconButton
               sx={{
                 position: "absolute",
