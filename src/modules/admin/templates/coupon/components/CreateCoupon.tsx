@@ -73,9 +73,9 @@ function CreateCoupon() {
         ) {
           values.start = batdau.toISOString();
           values.end = ketthuc.toISOString();
-          if (typeof window !== 'undefined') {
-            window.alert(JSON.stringify(values));
-          }
+          // if (typeof window !== 'undefined') {
+          //   window.alert(JSON.stringify(values));
+          // }
           
           handleCreateCoupon(values);
         }}

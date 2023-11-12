@@ -96,10 +96,10 @@ function CreateProductName() {
           formikHelpers: FormikHelpers<FormikValues>
         ) {
           console.log("img: ", values.img);
-          if (typeof window !== 'undefined') {
+          // if (typeof window !== 'undefined') {
            
-            window.alert(JSON.stringify(values));
-          }
+          //   window.alert(JSON.stringify(values));
+          // }
           handleCreateProductName(values);
         }}
       >

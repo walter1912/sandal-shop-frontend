@@ -26,14 +26,14 @@ export default function ListCoupon() {
 
   //  phần CRUD
   function handleEditClick(id: GridRowId) {
-    if (typeof window !== 'undefined') {
-      window.alert(id);
-    }
+    // if (typeof window !== 'undefined') {
+    //   window.alert(id);
+    // }
   }
   function handleDeleteClick(id: GridRowId) {
-    if (typeof window !== 'undefined') {
-      window.alert(id);
-    }
+    // if (typeof window !== 'undefined') {
+    //   window.alert(id);
+    // }
   }
   /*
 export interface CouponDto {
