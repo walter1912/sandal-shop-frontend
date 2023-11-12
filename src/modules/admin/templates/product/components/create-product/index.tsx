@@ -47,7 +47,6 @@ function CreateProduct() {
       coupon: values.coupon,
       img: String(img),
     };
-    window.alert(JSON.stringify(product));
 
     const res: any = await productsRequest.createProduct(product, dispatch);
     if (res.status == 201) {

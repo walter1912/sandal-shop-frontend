@@ -73,7 +73,6 @@ function CreateCoupon() {
         ) {
           values.start = batdau.toISOString();
           values.end = ketthuc.toISOString();
-          window.alert(JSON.stringify(values));
           handleCreateCoupon(values);
         }}
       >
