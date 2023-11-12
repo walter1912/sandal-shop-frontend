@@ -2,7 +2,7 @@
 import React from 'react';
 import ListBills from '~/modules/admin/templates/bill/list-bills';
 
-function page() {
+function Page() {
     return (
         <div>
             <ListBills />
@@ -10,4 +10,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

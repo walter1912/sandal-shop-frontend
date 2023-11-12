@@ -2,7 +2,7 @@
 import React from 'react';
 import ListCustomers from '~/modules/admin/templates/customer/list-customers';
 
-function page() {
+function Page() {
     return (
         <div>
             <ListCustomers />
@@ -10,4 +10,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

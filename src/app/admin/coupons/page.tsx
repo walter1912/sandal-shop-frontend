@@ -2,7 +2,7 @@
 import React from 'react';
 import ManagementCoupon from '~/modules/admin/templates/coupon';
 
-function page(props) {
+function Page(props) {
     return (
         <div>
             <ManagementCoupon />
@@ -10,4 +10,4 @@ function page(props) {
     );
 }
 
-export default page;
+export default Page;

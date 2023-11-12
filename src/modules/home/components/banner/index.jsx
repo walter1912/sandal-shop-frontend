@@ -6,8 +6,9 @@ import CustomSlider from "~/modules/global-components/CustomSlider";
 function Banner() {
   return (
     <CustomSlider width={"900px"} height={"90vh"}>
-      {listBanner.map(({ img }) => (
+      {listBanner.map(({ img }, index) => (
         <Image
+        key={index}
           src={img.src}
           alt={"hello"}
           fill

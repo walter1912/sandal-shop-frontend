@@ -98,34 +98,29 @@ function NavSearch({ setCurrentProduct }: { setCurrentProduct: Function }) {
           <></>
         )}
       </Box>
-      <FilterSearch
-        title="Danh mục"
-        children={
-          <TypeSearch
-            setType={setType}
-            typed={typed}
-            data={[
-              { type: "style", value: "tong" },
-              { type: "style", value: "2 quai" },
-              { type: "style", value: "3 quai" },
-            ]}
-          />
-        }
-      />
-      <FilterSearch
-        title="Màu sắc"
-        children={
-          <TypeSearch
-            setType={setType}
-            typed={typed}
-            data={[
-              { type: "color", value: "Đỏ" },
-              { type: "color", value: "Trắng" },
-              { type: "color", value: "Đen" },
-            ]}
-          />
-        }
-      />
+      <FilterSearch title="Danh mục">
+        <TypeSearch
+          setType={setType}
+          typed={typed}
+          data={[
+            { type: "style", value: "tong" },
+            { type: "style", value: "2 quai" },
+            { type: "style", value: "3 quai" },
+          ]}
+        />
+      </FilterSearch>
+
+      <FilterSearch title="Màu sắc">
+        <TypeSearch
+          setType={setType}
+          typed={typed}
+          data={[
+            { type: "color", value: "Đỏ" },
+            { type: "color", value: "Trắng" },
+            { type: "color", value: "Đen" },
+          ]}
+        />
+      </FilterSearch>
     </div>
   );
 }

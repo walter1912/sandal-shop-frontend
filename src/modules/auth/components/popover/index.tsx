@@ -61,7 +61,7 @@ const CustomPopover = (props: PopoverProps) => {
             justifyContent: "space-between",
           }}
         >
-          <span>"Keep Me Signed In" Checkbox</span>
+          <span>&quot;Keep Me Signed In&quot; Checkbox</span>
           <IconButton onClick={handleClose} edge="end">
             <Close />
           </IconButton>

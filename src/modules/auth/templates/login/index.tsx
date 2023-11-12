@@ -108,7 +108,7 @@ const LoginWithAccount = () => {
                   txtbutton="Chi tiết"
                   contentpopover={
                     <span>
-                      Chọn "Giữ cho tôi đăng nhập" sẽ giảm số lần bạn được yêu
+                      Chọn &quot;Giữ cho tôi đăng nhập&quot; sẽ giảm số lần bạn được yêu
                       cầu Đăng nhập trên thiết bị này. Để giữ cho bạn bảo mật
                       tài khoản, chỉ sử dụng tùy chọn này cho mục đích cá nhân
                       của bạn thiết bị.
