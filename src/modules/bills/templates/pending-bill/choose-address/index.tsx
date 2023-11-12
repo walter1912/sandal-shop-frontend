@@ -133,7 +133,7 @@ function ChooseAddress({
       ", " +
       dataCity.find((city) => city.code == cityChoosed)?.name;
     setAddress(address);
-
+  }
   return (
     <div
       className="navbar-item navbar-item--bg"
