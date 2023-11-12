@@ -1,6 +1,6 @@
 // thao tác với localStorage
 //
-'use client'
+// 'use client'
 export const getLocalStorage = (key: string): any => {
   if (typeof window !== "undefined") {
     const storedData = localStorage.getItem(key);
