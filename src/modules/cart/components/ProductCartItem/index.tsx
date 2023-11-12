@@ -27,7 +27,7 @@ function ProductCartItem({
     const productBought = productCart.type + ";" + productCart.size;
     setTimeout(() => {
       router.push(
-        `/products/${productCart.product?.name}?productBought=${productBought}&productBoughtId=${productCart.product?._id}`
+        `/products/${productCart.product?.name}?productBought=${String(productBought)}&productBoughtId=${String(productCart.product?._id)}`
       );
     }, 500);
   }

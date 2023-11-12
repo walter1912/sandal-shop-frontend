@@ -67,7 +67,10 @@ function CreateProductName() {
       style: values.style,
     };
 
-    const res:any = await productsRequest.createProductName(productName, dispatch);
+    const res: any = await productsRequest.createProductName(
+      productName,
+      dispatch
+    );
     if (res.status == 201) {
       setTimeout(() => {
         router.push("/admin/products/create-product");
@@ -104,7 +107,7 @@ function CreateProductName() {
               <label>Tên sản phẩm</label>
               <TextFieldStyled
                 name="name"
-                error={touched.name}
+                error={!!touched.name}
                 value={values.name}
                 onChange={handleChange}
                 placeholder="Nhập tên sản phẩm"
@@ -115,7 +118,7 @@ function CreateProductName() {
               <label>Mã sản phẩm</label>
               <TextFieldStyled
                 name="code"
-                error={touched.code}
+                error={!!touched.code}
                 value={values.code}
                 onChange={handleChange}
                 placeholder="Nhập mã sản phẩm"
@@ -157,7 +160,7 @@ function CreateProductName() {
               <label htmlFor="">Giá</label>
               <TextFieldStyled
                 name="cost"
-                error={touched.cost}
+                error={!!touched.cost}
                 value={values.cost}
                 onChange={handleChange}
                 placeholder="Nhập giá sản phẩm"
@@ -206,7 +209,7 @@ function CreateProductName() {
                   label="Ba quai"
                 />
               </RadioGroup>
-              {touched.style && (
+              {!!touched.style && (
                 <ErrorMessage
                   name="style"
                   render={(msg) => (
@@ -233,7 +236,7 @@ function CreateProductName() {
                 accept=".jpg,  .png, .jpeg, .svg"
                 style={{ display: "none" }}
               />
-              {touched.img && (
+              {!!touched.img && (
                 <ErrorMessage
                   name="img"
                   render={(msg) => (
@@ -243,7 +246,12 @@ function CreateProductName() {
               )}
             </FormField>
 
-            <ButtonMain sx={{ marginTop: "40px" }} onClick={handleSubmit}>
+            <ButtonMain
+              sx={{ marginTop: "40px" }}
+              onClick={(e) => {
+                handleSubmit
+              }}
+            >
               Thêm thông tin sản phẩm
             </ButtonMain>
           </Form>

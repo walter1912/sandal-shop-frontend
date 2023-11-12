@@ -257,7 +257,9 @@ function CreateProduct() {
             </Grid2>
 
             <ButtonMain
-              onClick={handleSubmit}
+              onClick={(e) => {
+                handleSubmit
+              }}
               sx={{
                 "&.MuiButton-root": {
                   width: "calc(100% - 40px)",

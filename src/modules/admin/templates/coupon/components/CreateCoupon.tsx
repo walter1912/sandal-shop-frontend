@@ -239,7 +239,7 @@ function CreateCoupon() {
                 </FormField>
               </Grid2>
               <Grid2 md={4}>
-                <ButtonMain onClick={handleSubmit}>Thêm mã giảm giá</ButtonMain>
+                <ButtonMain onClick={(e) => {handleSubmit}}>Thêm mã giảm giá</ButtonMain>
               </Grid2>
             </Grid2>
           </Form>

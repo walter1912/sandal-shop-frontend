@@ -24,7 +24,7 @@ const ProductItem = ({
   width?: number;
   height?: number;
 }) => {
-  const { id, name, star, cost, img, bought } = data;
+  const { _id, name, star, cost, img, bought } = data;
   if (width === undefined) {
     width = 370;
   }

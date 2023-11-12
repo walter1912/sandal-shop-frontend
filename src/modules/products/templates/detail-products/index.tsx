@@ -15,16 +15,16 @@ import { Review } from "~/models/review";
 import "./textarea.css";
 
 function DetailProduct({ name }: { name: string }) {
-  const searchParams = useSearchParams();
+  const searchParams: any = useSearchParams();
 
-  const productBought: string = searchParams.get("productBought");
-  const productBoughtId: string = searchParams.get("productBoughtId");
+  const productBought: string =  searchParams && searchParams.get("productBought") || "";
+  const productBoughtId: string = searchParams &&  searchParams.get("productBoughtId") || "";
   console.log(
     "productBought, productBoughtId ",
     productBought,
     productBoughtId
   );
-  const textareaRef = useRef(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInputChange = () => {
     const textarea = textareaRef.current;
@@ -61,7 +61,7 @@ function DetailProduct({ name }: { name: string }) {
         }: {
           reviews: Review[];
           rate: any;
-        } = await getAllReview(product._id);
+        } = await getAllReview(String(product._id));
         result.push({
           ...product,
           reviews: reviews,
@@ -75,7 +75,7 @@ function DetailProduct({ name }: { name: string }) {
   }, []);
 
   function handlePostComment(
-    event: MouseEvent<HTMLButtonElement, MouseEvent>
+    event: any
   ): void {
     console.log(contentComment);
     alert(contentComment);
@@ -136,7 +136,7 @@ function DetailProduct({ name }: { name: string }) {
 
               <ButtonMain
                 sx={{ width: "60px!important" }}
-                onClick={handlePostComment}
+                onClick={(e) => {handlePostComment}}
               >
                 Gửi
               </ButtonMain>

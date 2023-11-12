@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { LegacyRef, MutableRefObject, useEffect, useRef, useState } from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { ButtonText } from "../global-styles/custom-mui";
 import { Close } from "@mui/icons-material";
@@ -22,7 +22,7 @@ const ChatUI: React.FC = () => {
   const [close, setClose] = useState<boolean>(true);
 
   const [messages, setMessages] = useState<MessageDto[]>([]);
-  const scroll = useRef();
+  const scroll: any = useRef();
 
   useEffect(() => {
     const q = query(collection(dbFirebase, "chats"), orderBy("timestamp"));
