@@ -5,6 +5,8 @@
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off",
     "react-hooks/rules-of-hooks": "off", // Tắt cảnh báo về quy tắc hooks
-    "react-hooks/exhaustive-deps": "off" // Bạn vẫn có thể giữ cảnh báo về dependencies nếu cần thiết
+    "react-hooks/exhaustive-deps": "off" ,// Bạn vẫn có thể giữ cảnh báo về dependencies nếu cần thiết
+    "react/prop-types": "off", // Tắt kiểm tra kiểu cho propTypes
+    "react/no-typos": "off" // Tắt kiểm tra chính tả cho JSX elements
   }
 }
