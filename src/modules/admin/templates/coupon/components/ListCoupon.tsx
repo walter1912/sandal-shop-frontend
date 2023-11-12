@@ -92,6 +92,8 @@ export interface CouponDto {
       getActions: ({ id }) => {
         return [
           <GridActionsCellItemStyled
+          showInMenu={true}
+            key={id}
             icon={<Edit />}
             label="Edit"
             className="textPrimary"

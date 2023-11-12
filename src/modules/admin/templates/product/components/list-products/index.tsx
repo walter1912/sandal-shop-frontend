@@ -68,6 +68,8 @@ export default function ListProducts() {
       getActions: ({ id }) => {
         return [
           <GridActionsCellItemStyled
+            showInMenu={true}
+            key={id}
             icon={<Edit />}
             label="Edit"
             className="textPrimary"

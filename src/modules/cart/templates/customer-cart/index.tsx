@@ -59,7 +59,7 @@ function CustomerCart() {
           <h2>Danh sách sản phẩm trong giỏ hàng</h2>
           <List>
             {listProductcart.map((productCart, index) => (
-              <div className="flex-row-center">
+              <div className="flex-row-center" key={index}>
                 <Checkbox
                   onChange={(e: any) =>
                     setListProductBill((pre: string[]) => {

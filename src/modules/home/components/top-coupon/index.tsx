@@ -44,14 +44,15 @@ function TopCoupon() {
             }
             return result;
           }, [])
-          .map((value) => {
+          .map((value, index) => {
             let j = value + 1;
             if (j === coupons.top.length) {
               j = 0;
             }
 
             return (
-              <div
+              <div 
+                key={index}
                 className="flex-row-center"
                 style={{ padding: 0, margin: 0 }}
               >
