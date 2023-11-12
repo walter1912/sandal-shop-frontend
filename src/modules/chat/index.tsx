@@ -93,10 +93,12 @@ const ChatUI: React.FC = () => {
               borderBottom: "2px solid var(--color-main)",
               bgcolor: "var(--color-main)",
               position: "relative",
-              minHeight: "60px",
+              minHeight: "80px",
+              height:'fit-content',
               display: "flex",
               flexDirection: "column",
-              paddingLeft:'20px'
+              paddingLeft:'20px',
+              color: 'var(--white)'
             }}
             component="div"
           >

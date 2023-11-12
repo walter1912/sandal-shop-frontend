@@ -47,10 +47,10 @@ const Message: React.FC<MessageProps> = ({ message }) => {
               mr: isBot ? 0 : 1,
               backgroundColor: isBot ? "#bc9af4" : "#67ccd1",
               borderRadius: isBot ? "20px 20px 20px 5px" : "20px 20px 5px 20px",
-              border: "1px solid var(--black)",
+              // border: "1px solid var(--black)",
             }}
           >
-            <Typography variant="body1">{message.content}</Typography>
+            <Typography variant="body1" sx={{color:'var(--white)'}}>{message.content}</Typography>
           </Paper>
         </Box>
       </Box>
