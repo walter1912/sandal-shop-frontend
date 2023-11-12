@@ -92,7 +92,6 @@ function CreateProduct() {
           values: FormikValues,
           formikHelpers: FormikHelpers<FormikValues>
         ) {
-          window.alert(JSON.stringify(values));
           handleCreateProduct(values);
         }}
       >
