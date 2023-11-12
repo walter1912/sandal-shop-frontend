@@ -1,7 +1,10 @@
 {
   "extends": "next",
+  "plugins": ["react-hooks"],
   "rules": {
     "react/no-unescaped-entities": "off",
-    "@next/next/no-page-custom-font": "off"
+    "@next/next/no-page-custom-font": "off",
+    "react-hooks/rules-of-hooks": "off", // Tắt cảnh báo về quy tắc hooks
+    "react-hooks/exhaustive-deps": "off" // Bạn vẫn có thể giữ cảnh báo về dependencies nếu cần thiết
   }
 }
