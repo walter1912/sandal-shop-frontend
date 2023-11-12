@@ -24,14 +24,10 @@ export default function ListProducts() {
 
   //  phần CRUD
   function handleEditClick(id: GridRowId) {
-    // if (typeof window !== "undefined") {
-    //   window.alert(id);
-    // }
+    window.alert(id);
   }
   function handleDeleteClick(id: GridRowId) {
-    // if (typeof window !== "undefined") {
-    //   window.alert(id);
-    // }
+    window.alert(id);
   }
 
   const columns: GridColDef[] = [

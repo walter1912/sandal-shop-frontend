@@ -133,10 +133,6 @@ function ChooseAddress({
       ", " +
       dataCity.find((city) => city.code == cityChoosed)?.name;
     setAddress(address);
-    // if (typeof window !== 'undefined') {      
-    //   window.alert("địa chỉ: " + address);
-    // }
-  }
 
   return (
     <div
