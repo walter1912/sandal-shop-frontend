@@ -47,7 +47,9 @@ function CreateProduct() {
       coupon: values.coupon,
       img: String(img),
     };
-    window.alert(JSON.stringify(product));
+    if (typeof window !== 'undefined') {
+      window.alert(JSON.stringify(product));
+    }
 
     const res: any = await productsRequest.createProduct(product, dispatch);
     if (res.status == 201) {
@@ -93,7 +95,10 @@ function CreateProduct() {
           values: FormikValues,
           formikHelpers: FormikHelpers<FormikValues>
         ) {
-          window.alert(JSON.stringify(values));
+          if (typeof window !== 'undefined') {
+           
+            window.alert(JSON.stringify(values));
+          }
           handleCreateProduct(values);
         }}
       >
