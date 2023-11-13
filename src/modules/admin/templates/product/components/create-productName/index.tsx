@@ -142,17 +142,19 @@ function CreateProductName() {
               }}
             >
               <label>Mô tả sản phẩm</label>
-              <ReactQuill
-                value={editorHtml}
-                onChange={(e) => {
-                  values.detail = encode(editorHtml);
-                  setEditorHtml(e);
-                }}
-                modules={modules}
-                formats={formats}
-                placeholder="Hãy tạo bài viết của bạn"
-                bounds={".create-productName"}
-              />
+              {typeof window !== "undefined" && (
+                <ReactQuill
+                  value={editorHtml}
+                  onChange={(e) => {
+                    values.detail = encode(editorHtml);
+                    setEditorHtml(e);
+                  }}
+                  modules={modules}
+                  formats={formats}
+                  placeholder="Hãy tạo bài viết của bạn"
+                  bounds={".create-productName"}
+                />
+              )}
             </FormField>
 
             <FormField>
@@ -248,7 +250,7 @@ function CreateProductName() {
             <ButtonMain
               sx={{ marginTop: "40px" }}
               onClick={(e) => {
-                handleSubmit
+                handleSubmit;
               }}
             >
               Thêm thông tin sản phẩm
