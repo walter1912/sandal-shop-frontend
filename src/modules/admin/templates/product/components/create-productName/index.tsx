@@ -15,7 +15,6 @@ import {
   TextFieldStyled,
 } from "~/modules/global-styles/custom-mui";
 
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { formats, modules } from "./props";
 import { decode, encode } from "html-entities";
@@ -31,7 +30,9 @@ import { productsRequest } from "~/services/products/productsRequest";
 import { useAppDispatch } from "~/lib/store/hook";
 import { firebaseRequest } from "~/services/firebase/firebaseRequest";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 const initialValues: ProductName = {
   name: "",
   code: "",
