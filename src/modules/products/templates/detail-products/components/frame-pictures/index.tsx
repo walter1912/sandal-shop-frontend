@@ -30,21 +30,23 @@ function FramePictrure({
   } = styles;
 
   useEffect(() => {
-    let elements = document.querySelectorAll(".childImage");
+    if (typeof window !== "undefined") {
+      let elements = document.querySelectorAll(".childImage");
 
-    elements.forEach((element: any) => {
-      element.style.margin = "2px";
-      element.style.border = "2px solid transparent";
+      elements.forEach((element: any) => {
+        element.style.margin = "2px";
+        element.style.border = "2px solid transparent";
 
-      element.addEventListener("mouseout", () => {
-        element.style.borderColor = "transparent";
+        element.addEventListener("mouseout", () => {
+          element.style.borderColor = "transparent";
+        });
+        element.addEventListener("mouseover", () => {
+          element.style.cursor = "pointer";
+          element.style.borderColor = "var(--blue)";
+          setCurrentProduct(data[element.getAttribute("data-key")]);
+        });
       });
-      element.addEventListener("mouseover", () => {
-        element.style.cursor = "pointer";
-        element.style.borderColor = "var(--blue)";
-        setCurrentProduct(data[element.getAttribute("data-key")]);
-      });
-    });
+    }
   }, []);
 
   return (

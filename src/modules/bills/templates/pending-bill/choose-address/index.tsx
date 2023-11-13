@@ -60,25 +60,27 @@ function ChooseAddress({
 
   // phần check xem tỉnh/ huyện nào được chọn
   function handleChange(select: string) {
-    let element: HTMLSelectElement = document.getElementById(
-      select
-    ) as HTMLSelectElement;
-    const selectedOption = element.options[element.selectedIndex]; // Lấy phần tử option đã chọn
+    if (typeof window !== "undefined") {
+      let element: HTMLSelectElement = document.getElementById(
+        select
+      ) as HTMLSelectElement;
+      const selectedOption = element.options[element.selectedIndex]; // Lấy phần tử option đã chọn
 
-    // Lấy giá trị của thuộc tính data-id
-    const dataId = selectedOption.getAttribute("data-id");
-    switch (select) {
-      case "city": {
-        setCityChoosed(String(dataId));
-        break;
-      }
-      case "district": {
-        setDistrictChoosed(String(dataId));
-        break;
-      }
-      case "ward": {
-        setWardChoosed(String(dataId));
-        break;
+      // Lấy giá trị của thuộc tính data-id
+      const dataId = selectedOption.getAttribute("data-id");
+      switch (select) {
+        case "city": {
+          setCityChoosed(String(dataId));
+          break;
+        }
+        case "district": {
+          setDistrictChoosed(String(dataId));
+          break;
+        }
+        case "ward": {
+          setWardChoosed(String(dataId));
+          break;
+        }
       }
     }
   }
@@ -123,16 +125,19 @@ function ChooseAddress({
   };
 
   function handleSaveAddress() {
-    let detailAddressEle: any = document.getElementById("detailAddress");
-    let address =
-      detailAddressEle.value +
-      ", " +
-      dataWard.find((ward) => ward.code == wardChoosed)?.name +
-      ", " +
-      dataDistrict.find((district) => district.code == districtChoosed)?.name +
-      ", " +
-      dataCity.find((city) => city.code == cityChoosed)?.name;
-    setAddress(address);
+    if (typeof window !== "undefined") {
+      let detailAddressEle: any = document.getElementById("detailAddress");
+      let address =
+        detailAddressEle.value +
+        ", " +
+        dataWard.find((ward) => ward.code == wardChoosed)?.name +
+        ", " +
+        dataDistrict.find((district) => district.code == districtChoosed)
+          ?.name +
+        ", " +
+        dataCity.find((city) => city.code == cityChoosed)?.name;
+      setAddress(address);
+    }
   }
   return (
     <div
