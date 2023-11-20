@@ -1,13 +1,17 @@
-'use client'
-import React from 'react';
-import AllProduct from '~/modules/products/templates/all-products';
+"use client";
+import { useSearchParams } from "next/navigation";
+import React from "react";
+import AllProduct from "~/modules/products/templates/all-products";
 
 function AllProductPage() {
-    return (
-        <div>
-            <AllProduct />
-        </div>
-    );
+  const searchParams = useSearchParams();
+
+  const keyword: any = searchParams?.get("keyword");
+  return (
+    <div>
+      <AllProduct searchKeyword={String(keyword)} />
+    </div>
+  );
 }
 
 export default AllProductPage;

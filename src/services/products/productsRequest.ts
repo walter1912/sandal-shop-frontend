@@ -5,6 +5,14 @@ import { ProductName } from "~/models/productName";
 import { Product } from "~/models/product";
 
 export const productsRequest = {
+  searchProduct: async function (keyword: string, dispatch: Function) {
+    try {
+      let url = `products/search?keyword=${keyword}`;
+      let res: any = await axiosInstance.get(url);
+     if(res.data.products.length > 1) dispatch(productsAction.setProductsName(res.data.products));
+    } catch (err: any) {
+    }
+  },
   findAllProduct: async function (dispatch: Function) {
     try {
       let url = "products";

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 //material UI
 import { Divider, IconButton, InputAdornment } from "@mui/material";
@@ -21,8 +21,26 @@ import Image from "next/image";
 import logo from "~/assets/images/logo.png";
 import { useAppSelector } from "~/lib/store/hook";
 import { getLocalStorage } from "~/lib/utils/localStorage";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 const Header = (props?: any) => {
   const auth = useAppSelector((state) => state.auth);
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const router = useRouter();
+  const searchParams = useSearchParams()!
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams)
+      params.set(name, value)
+ 
+      return params.toString()
+    },
+    [searchParams]
+  )
+  function handleSearchProduct(e:any) {
+    router.push("/products" + '?' + createQueryString('keyword', searchKeyword))
+  }
   return (
     <>
       <Contained>
@@ -41,9 +59,16 @@ const Header = (props?: any) => {
         <SearchForm
           type={"search"}
           focus="true"
+          value={searchKeyword}
+          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setSearchKeyword(e.target.value)}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton onClick={() => {}} edge="end">
+              <IconButton
+                onClick={(e) => {
+                  handleSearchProduct(e);
+                }}
+                edge="end"
+              >
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
@@ -77,12 +102,15 @@ const Header = (props?: any) => {
         </MenuList>
 
         {/* login hoặc sign in */}
-        {getLocalStorage('auth') == undefined ? (
+        {getLocalStorage("auth") == undefined ? (
           <MenuList href={"/auth/login"}>
             <span>Đăng nhập</span>
           </MenuList>
         ) : (
-          <MenuList href={"/profile"}>{auth.username}</MenuList>
+          <>
+            <MenuList href={"/profile"}>{auth.username}</MenuList>
+            <MenuList href={"/auth/logout"}>Đăng xuất</MenuList>
+          </>
         )}
       </Contained>
       <Divider />
