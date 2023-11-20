@@ -32,7 +32,7 @@ import { firebaseRequest } from "~/services/firebase/firebaseRequest";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const initialValues: ProductName = {
   name: "",
   code: "",
@@ -251,7 +251,7 @@ function CreateProductName() {
             <ButtonMain
               sx={{ marginTop: "40px" }}
               onClick={(e) => {
-                handleSubmit;
+                handleSubmit()
               }}
             >
               Thêm thông tin sản phẩm

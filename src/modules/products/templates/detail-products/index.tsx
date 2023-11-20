@@ -17,8 +17,10 @@ import "./textarea.css";
 function DetailProduct({ name }: { name: string }) {
   const searchParams: any = useSearchParams();
 
-  const productBought: string =  searchParams && searchParams.get("productBought") || "";
-  const productBoughtId: string = searchParams &&  searchParams.get("productBoughtId") || "";
+  const productBought: string =
+    (searchParams && searchParams.get("productBought")) || "";
+  const productBoughtId: string =
+    (searchParams && searchParams.get("productBoughtId")) || "";
   console.log(
     "productBought, productBoughtId ",
     productBought,
@@ -73,10 +75,24 @@ function DetailProduct({ name }: { name: string }) {
     }
     fetchData();
   }, []);
+  useEffect(() => {
+    async function getAllReview(idProduct: string) {
+      const reviews: Review[] = await commentRequest.getReviews(idProduct);
+      const rate = await commentRequest.getRate(idProduct);
+      setCurrentProduct((pre: any) => {
+        let res = {
+          ...pre,
+          reviews,
+          star:rate,
+        };
+        return res;
+      });
+    }
+    getAllReview(currentProduct._id);
+  }, [handlePostComment]);
 
-  function handlePostComment(
-    event: any
-  ): void {
+
+  function handlePostComment(event: any): void {
     console.log(contentComment);
     alert(contentComment);
     let data = {
@@ -84,6 +100,7 @@ function DetailProduct({ name }: { name: string }) {
       content: contentComment,
     };
     commentRequest.postReview(data);
+    setContentComment("");
   }
 
   return (
@@ -136,7 +153,9 @@ function DetailProduct({ name }: { name: string }) {
 
               <ButtonMain
                 sx={{ width: "60px!important" }}
-                onClick={(e) => {handlePostComment}}
+                onClick={(e) => {
+                  handlePostComment(e);
+                }}
               >
                 Gửi
               </ButtonMain>
