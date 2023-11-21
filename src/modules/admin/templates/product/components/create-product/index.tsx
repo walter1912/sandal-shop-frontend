@@ -256,7 +256,7 @@ function CreateProduct() {
 
             <ButtonMain
               onClick={(e) => {
-                handleSubmit(e)
+                handleSubmit()
               }}
               sx={{
                 "&.MuiButton-root": {
