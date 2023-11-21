@@ -24,7 +24,8 @@ const ProductItem = ({
   width?: number;
   height?: number;
 }) => {
-  const { _id, name, star, cost, img, bought } = data;
+  const { _id, name, star, cost, bought } = data;
+  let img = 'https://firebasestorage.googleapis.com/v0/b/sandal-project.appspot.com/o/products%2Fhai%20quai%20lo%E1%BA%A1i%202%2Fimgs%2Fdtl1-1.jpg?alt=media&token=b3f0b990-342b-41a5-8517-95f6d3ae7c42'
   if (width === undefined) {
     width = 370;
   }
