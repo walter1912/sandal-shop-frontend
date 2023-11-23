@@ -15,8 +15,8 @@ const firebaseConfig = {
   projectId: "sandal-project",
   storageBucket: "sandal-project.appspot.com",
   messagingSenderId: "739556599151",
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID,
+  appId: '1:739556599151:web:2dee427e603fa6442cb49a',
+  measurementId: 'G-N7WYL8RDLH'
 };
 
 // Initialize Firebase
