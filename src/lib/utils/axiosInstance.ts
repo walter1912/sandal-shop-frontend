@@ -5,7 +5,7 @@ import { getLocalStorage } from "./localStorage";
 const axiosInstance = axios.create({
   // withCredentials: false,
   // process.env.BASE_API_URL ||
-  baseURL: "http://localhost:3012/",
+  baseURL: process.env.HOST_API,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
